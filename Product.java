@@ -3,7 +3,8 @@
  * @author Michael English
  * @author Dylan King
  */
-public class Product {
+public class Product
+{
 
 	private String description;
 	private double price;
