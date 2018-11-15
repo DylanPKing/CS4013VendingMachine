@@ -1,0 +1,7 @@
+/**
+ * VendingMachine
+ */
+public class VendingMachine {
+
+	
+}
