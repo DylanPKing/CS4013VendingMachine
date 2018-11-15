@@ -1,5 +1,6 @@
 /**
  * Coin
+ * @author Dylan King
  */
 public class Coin {
 
@@ -10,9 +11,9 @@ public class Coin {
      * Constructs a coin.
      * @param value the monetary value of the coin.
      * @param name the name of the coin
-	*/
-	public Coin(double value, String name) 
-  	{ 
+	 */
+	public Coin(double value, String name)
+	{ 
 		this.value = aValue; 
 		this.name = aName;
 	}
@@ -20,19 +21,22 @@ public class Coin {
 	/**
 	 * @return the value
 	 */
-	public double getValue() {
+	public double getValue()
+	{
 		return value;
 	}
 
 	/**
 	 * @return the name
 	 */
-	public String getName() {
+	public String getName()
+	{
 		return name;
 	}
 
 	@Override
-	public String toString() {
+	public String toString()
+	{
 		return name;
 	}
 }

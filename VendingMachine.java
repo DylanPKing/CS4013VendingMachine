@@ -1,7 +1,8 @@
 /**
  * VendingMachine
  */
-public class VendingMachine {
+public class VendingMachine
+{
 
 	
 }

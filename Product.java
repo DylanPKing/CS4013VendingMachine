@@ -1,5 +1,6 @@
 /**
  * Product
+ * 
  */
 public class Product {
 
@@ -11,7 +12,7 @@ public class Product {
      * Constructs a Product object
      * @param description the description of the product
      * @param price the price of the product
-	*/
+	 */
 	public Product(String description, double price)
 	{  
 		this.description = description;
@@ -21,33 +22,38 @@ public class Product {
 	/**
 	 * @return the description
 	 */
-	public String getDescription() {
+	public String getDescription()
+	{
 		return description;
 	}
 
 	/**
 	 * @return the price
 	 */
-	public double getPrice() {
+	public double getPrice()
+	{
 		return price;
 	}
 
 	/**
 	 * @return the quantity
 	 */
-	public int getQuantity() {
+	public int getQuantity()
+	{
 		return quantity;
 	}
 
 	/**
 	 * @param quantity the quantity to set
 	 */
-	public void setQuantity(int quantity) {
+	public void setQuantity(int quantity)
+	{
 		this.quantity = quantity;
 	}
 
 	@Override
-	public String toString() {
+	public String toString()
+	{
 		return String.format("Description:\t%s\nPrice:\t%.2f\nQuantity Available:\t%d",
 							 description, price, quantity);
 	}
