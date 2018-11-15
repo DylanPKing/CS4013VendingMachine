@@ -3,7 +3,8 @@
  * @author Michael English
  * @author Dylan King
  */
-public class Coin {
+public class Coin 
+{
 
 	private double value;
 	private String name;
