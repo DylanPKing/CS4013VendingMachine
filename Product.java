@@ -1,6 +1,7 @@
 /**
  * Product
- * 
+ * @author Michael English
+ * @author Dylan King
  */
 public class Product {
 

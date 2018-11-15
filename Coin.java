@@ -1,5 +1,6 @@
 /**
  * Coin
+ * @author Michael English
  * @author Dylan King
  */
 public class Coin {
