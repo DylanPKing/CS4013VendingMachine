@@ -15,7 +15,7 @@ class VendingMachineMenu
 
 	/**
 	 * The commandline interface for the vending machine.
-	 * @param machine the Vending
+	 * @param machine the Vending Machine currently in use.
 	 */
 	void runCMD(VendingMachine machine)
 	{
@@ -64,6 +64,11 @@ class VendingMachineMenu
 		}
 	}
 
+	/**
+	 * 
+	 * @param machine
+	 * @throws IOException
+	 */
 	void readFiles(VendingMachine machine) throws IOException
 	{
 		machine.coins = new ArrayList<Coin>();
@@ -139,6 +144,11 @@ class VendingMachineMenu
 		in.close();
 	}
 
+	/**
+	 * 
+	 * @param machine
+	 * @throws IOException
+	 */
 	void writeFiles(VendingMachine machine) throws IOException
 	{
 		File coin = new File("./Coins.csv");
@@ -170,6 +180,10 @@ class VendingMachineMenu
 		}
 	}
 
+	/**
+	 * SHows the options avaialable for the current user.
+	 * @return the available options
+	 */
 	private String showOptions()
 	{
 		String output = "(S)how products\n" +
@@ -187,6 +201,11 @@ class VendingMachineMenu
 		return output + "(Q)uit";
 	}
 
+	/**
+	 * Shows the currently available products for sale
+	 * @param products the ArrayList of currently avaialable products
+	 * @return the currently avialable products as a String.
+	 */
 	private String showProducts(ArrayList<Product> products)
 	{
 		String output = "";
@@ -195,6 +214,9 @@ class VendingMachineMenu
 		return output;
 	}
 
+	/**
+	 * Offers a password input for the user to access operator mode.]
+	 */
 	private void accessOperatorMode()
 	{
 		if (!gui)
@@ -251,11 +273,22 @@ class VendingMachineMenu
 		}
 	}
 
+	/**
+	 * Prints the amount of coins removed from the machine,
+	 * and calls the machines removeMoney method
+	 * @param machine the vending machine in use
+	 * @return The sum of the coins removed.
+	 */
 	private String removeCurrentCoins(VendingMachine machine)
 	{
 		return "Removed: " + machine.removeMoney();
 	}
 
+	/**
+	 * Prints the available choices of the passed in Array
+	 * @param choices Object array of the coins/products
+	 * @return the choice made by the user.
+	 */
 	private Object getChoice(Object[] choices)
 	{
 		for (int i = 0; i < choices.length; i++)
