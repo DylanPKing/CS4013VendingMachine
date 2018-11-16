@@ -2,6 +2,9 @@ package cs4013project.vendingmachine;
 
 import java.util.*;
 
+/**
+ * @author Louise Madden 17198232
+ */
 class VendingMachine
 {
     ArrayList<Product> products;
