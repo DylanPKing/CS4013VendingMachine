@@ -145,6 +145,7 @@ class VendingMachineMenu
 				else
 					System.out.println("Invalid price.");
 			}
+			in.close();
 		}
 		else
 		{
