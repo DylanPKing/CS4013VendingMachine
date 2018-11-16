@@ -10,25 +10,32 @@ class VendingMachine
     ArrayList<Integer> coinQuantity;
     ArrayList<Coin> currentCoins;
     double currentBalance;
-    
+    /**
+     * Constructor
+     */
     VendingMachine() 
     {
 
     }
 
+    /**
+     * Called when the user inserts a coin to the machine
+     * The coin that is added is added to currentCoins to be used later
+     * Adds the value of the coin to currentBalance
+     */
     void addCoin(Coin inserted)
     {
-        for (int i = 0; i < coins.size(); i++)
-        {
-            if (coins.get(i).getName() == inserted.getName())
-            {
-                //coinQuantity.set(i, (coinQuantity.get(i) + 1));
-                currentCoins.add(inserted);
-                currentBalance += inserted.getValue();
-            }
-        }
+        currentCoins.add(inserted);
+        currentBalance += inserted.getValue();
     }
 
+    /**
+     * Called when the user wants to buy a product
+     * Checks if the user has enough money inserted into the machine
+     * If they have enough then the value is removed from currentBalance and 
+     * the coins are moved from currentCoins to coins and their qantity to coinQuantity 
+     * If they dont have enough it returns the users coins and throws a VendingException
+     */
     void buyProduct(Product toBuy)
     {
         //You can buy it
@@ -68,7 +75,12 @@ class VendingMachine
         }
     }
 
-    //Operator method - removes all money from the machine
+    /**
+     * Operator only method
+     * Finds the value of all coins in the machine
+     * Removes these from the machine
+     * Resets the quantity of each coin to 0
+     */
     void removeMoney()
     {
         double total = 0;
@@ -85,12 +97,20 @@ class VendingMachine
         }
     }
 
-    void addProduct(Product toAdd)
+    /**
+     * This method adds a product to the vending machine
+     * @param toAdd
+     * @param quantity
+     * toAdd is the product that is added
+     * If there is already some of this product in the machine then the added quantity is added to the quantity that is already in the machine
+     * If there are none of the product in the machine it adds a new product in the ArrayList and adds the products in the parallel prodQuantity ArrayList
+     */
+    void addProduct(Product toAdd, int quantity)
     {
         if(!products.contains(toAdd))
         {
             products.add(toAdd);
-            prodQuantity.add(1);
+            prodQuantity.add(quantity);
         }
         else
         {
