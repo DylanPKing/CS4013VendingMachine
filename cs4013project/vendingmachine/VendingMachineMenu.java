@@ -67,8 +67,10 @@ class VendingMachineMenu
 	}
 
 	/**
-	 * 
-	 * @param machine
+	 * Reads from the Products, Money and Operator files.
+	 *Adds products and coins to their arraylists as well as adding their quantities to their own arraylists.
+	 *Separates operator details for use in another method.
+	 * @param machine the Vending Machine currently in use.
 	 * @throws IOException
 	 */
 	void readFiles(VendingMachine machine) throws IOException
@@ -93,9 +95,6 @@ class VendingMachineMenu
 		
 		String operatorName ="";
 		String operatorPassword ="";
-		
-		//product: name,price,quantity
-		//coins:name,double value,quantity
 		
 		//Reads products and adds all products to the products ArrayList, it adds the quantity to it's own product quantity ArrayList
 		Scanner in = new Scanner(product);
@@ -147,8 +146,8 @@ class VendingMachineMenu
 	}
 
 	/**
-	 * 
-	 * @param machine
+	 * Writes the product objects and their quantities to file, as well as writing the coin objects and their quantities to file.
+	 * @param machine the Vending Machine currently in use.
 	 * @throws IOException
 	 */
 	void writeFiles(VendingMachine machine) throws IOException
@@ -183,7 +182,7 @@ class VendingMachineMenu
 	}
 
 	/**
-	 * SHows the options avaialable for the current user.
+	 * Shows the options avaialable for the current user.
 	 * @return the available options
 	 */
 	private String showOptions()
