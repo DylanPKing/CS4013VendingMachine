@@ -1,6 +1,7 @@
 package cs4013project.vendingmachine;
 
 import java.util.*;
+import java.io.*;
 
 /**
  * VendingMachineMenu
@@ -12,10 +13,6 @@ class VendingMachineMenu
 	private boolean operator;
 	private String operatorPassword;
 
-	VendingMachineMenu()
-	{
-		readFiles();
-	}
 	/**
 	 * The commandline interface for the vending machine.
 	 * @param machine the Vending
@@ -67,9 +64,110 @@ class VendingMachineMenu
 		}
 	}
 
-	private void readFiles()
+	void readFiles(VendingMachine machine) throws IOException
 	{
+		machine.coins = new ArrayList<Coin>();
+		machine.products = new ArrayList<Product>();
+		
+		machine.prodQuantity = new ArrayList<Integer>();
+		machine.coinQuantity = new ArrayList<Integer>();
+		
+		File product = new File("./Products.csv");
+		File coin = new File("./Money.csv");
+		File operator = new File("./Operators.csv");
+		
+		String[] lineFromFile;
+		String productName = "";
+		double productPrice = 0.0;
+		int quantity = 0;
+		
+		String coinName = "";
+		double coinValue = 0.0;
+		
+		String operatorName ="";
+		String operatorPassword ="";
+		
+		//product: name,price,quantity
+		//coins:name,double value,quantity
+		
+		//Reads products and adds all products to the products ArrayList, it adds the quantity to it's own product quantity ArrayList
+		Scanner in = new Scanner(product);
+		while(in.hasNext())
+		{
+			for(int i = 0; i < machine.products.size(); i++)
+			{
+				lineFromFile = (in.nextLine().split(","));
+				productName = lineFromFile[0];
+				productPrice = Double.parseDouble(lineFromFile[1]);
+				quantity = Integer.parseInt(lineFromFile[2]);
+				
+				Product someProduct = new Product(productName, productPrice);
+				machine.products.add(someProduct);
+				
+				machine.prodQuantity.add(quantity);
+			}
+		}
+		in.close();
+		
+		//Reads coins and adds all coins to the coins ArrayList, it adds the quantity to it's own coin quantity ArrayList
+		in = new Scanner(coin);
+		while(in.hasNext())
+		{
+			for(int i = 0; i < machine.coins.size(); i++)
+			{
+				lineFromFile = (in.nextLine().split(","));
+				coinName = lineFromFile[0];
+				coinValue = Double.parseDouble(lineFromFile[1]);
+				quantity = Integer.parseInt(lineFromFile[2]);
+				
+				Coin aCoin = new Coin(coinValue,coinName);
+				machine.coins.add(aCoin);
+				
+				machine.coinQuantity.add(quantity);
+			}
+		}
+		in.close();
+		
+		//Reads operators and separates the name and password
+		in = new Scanner(operator);
+		while(in.hasNext())
+		{
+			lineFromFile =(in.nextLine().split(","));
+			operatorName = lineFromFile[0];
+			operatorPassword = lineFromFile[1];
+		}
+		in.close();
+	}
 
+	void writeFiles(VendingMachine machine) throws IOException
+	{
+		File coin = new File("./Coins.csv");
+		File product = new File("./Products.csv");
+		
+		FileWriter fr = new FileWriter(product, true);
+		PrintWriter pr = new PrintWriter(fr);
+		
+		FileWriter fr1 = new FileWriter(coin, true);
+		PrintWriter pr1 = new PrintWriter(fr1);
+		
+		
+		for(int i =0; i < machine.products.size();i++)
+		{
+			pr.println(machine.products.get(i).getDescription() + "," +
+					   machine.products.get(i).getPrice() + "," + 
+					   machine.productQuantity.get(i));
+			fr.close();
+			pr.close();
+		}
+		
+		for(int i = 0; i < machine.coins.size();i++)
+		{
+			pr1.print(machine.coins.get(i).getName() + "," +
+					  machine.coins.get(i).getValue() + "," +
+					  machine.coinQuantity.get(i));
+			fr1.close();
+			pr1.close();
+		}
 	}
 
 	private String showOptions()
