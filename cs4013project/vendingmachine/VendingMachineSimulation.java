@@ -55,11 +55,16 @@ public class VendingMachineSimulation extends Application
 		Button cmdButton = new Button("Command Line Interface");
 		Button guiButton = new Button("Graphical User Interface");
 
+		// Make the buttons wide
+		cmdButton.setMaxWidth(Double.MAX_VALUE);
+		guiButton.setMaxWidth(Double.MAX_VALUE);
+
 		// Populate the grid pane
 		choice.add(question, 1, 0);
 		choice.add(emptySpace, 1, 1);
-		choice.add(cmdButton, 0, 2);
-		choice.add(guiButton, 3, 2);
+		choice.add(cmdButton, 1, 2);
+		//choice.add(emptySpace, 1, 3);
+		choice.add(guiButton, 1, 3);
 
 		// Set up the scene by putting things together
 		Scene welcomeScreen = new Scene(choice, 300, 200);
@@ -70,6 +75,7 @@ public class VendingMachineSimulation extends Application
 			@Override
 			public void handle(ActionEvent event)
 			{
+				primaryStage.close();
 				menu.runCMD(machine);
 			}
 		});
@@ -80,6 +86,7 @@ public class VendingMachineSimulation extends Application
 			@Override
 			public void handle(ActionEvent event)
 			{
+				primaryStage.close();
 				//menu.runGUI();
 			}
 		});
