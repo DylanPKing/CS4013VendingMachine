@@ -1,21 +1,17 @@
-package 
+package cs4013project.vendingmachine;
 
-import java.util.Scanner;
+import java.util.*;
 
 /**
  * VendingMachineMenu
  */
-public class VendingMachineMenu
+class VendingMachineMenu
 {
 
-	private ArrayList<Coin> coins;
-	private ArrayList<Integer> coinQuantity;
-	private ArrayList<Coin> currentCoins;
-	private ArrayList<Integer> currentCoinsQuantity;
 	private boolean gui;
 	private boolean operator;
 
-	public VendingMachineMenu()
+	VendingMachineMenu()
 	{
 		readFiles();
 	}
@@ -23,7 +19,7 @@ public class VendingMachineMenu
 	 * The commandline interface for the vending machine.
 	 * @param machine the Vending
 	 */
-	public void runCMD(VendingMachine machine)
+	void runCMD(VendingMachine machine)
 	{
 		boolean running = true;
 		while (running)
@@ -35,7 +31,7 @@ public class VendingMachineMenu
 
 			if (command.equalsIgnoreCase("S"))
 			{
-				for (Product p : machine.getProductTypes())
+				for (Product p : machine.getProductTypes()){}
 				
 			}
 			else if (command.equalsIgnoreCase("I"))
@@ -69,10 +65,7 @@ public class VendingMachineMenu
 				String inputStr = in.nextLine();
 				int input = (inputStr.matches("\\d+") ? Integer.parseInt(inputStr) : -1);
 				in.close();
-				if (input == -1)
-				{
-					throw new 
-				}
+				
 			}
 		}
 	}

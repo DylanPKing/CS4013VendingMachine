@@ -1,9 +1,11 @@
+package cs4013project.vendingmachine;
+
 /**
  * Coin
  * @author Michael English
  * @author Dylan King
  */
-public class Coin 
+class Coin 
 {
 
 	private double value;
@@ -14,16 +16,16 @@ public class Coin
      * @param value the monetary value of the coin.
      * @param name the name of the coin
 	 */
-	public Coin(double value, String name)
+	Coin(double value, String name)
 	{ 
-		this.value = aValue; 
-		this.name = aName;
+		this.value = value; 
+		this.name = name;
 	}
 	
 	/**
 	 * @return the value
 	 */
-	public double getValue()
+	double getValue()
 	{
 		return value;
 	}
@@ -31,7 +33,7 @@ public class Coin
 	/**
 	 * @return the name
 	 */
-	public String getName()
+	String getName()
 	{
 		return name;
 	}

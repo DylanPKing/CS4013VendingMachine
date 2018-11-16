@@ -1,9 +1,11 @@
+package cs4013project.vendingmachine;
+
 /**
  * Product
  * @author Michael English
  * @author Dylan King
  */
-public class Product
+class Product
 {
 
 	private String description;
@@ -15,7 +17,7 @@ public class Product
      * @param description the description of the product
      * @param price the price of the product
 	 */
-	public Product(String description, double price)
+	Product(String description, double price)
 	{  
 		this.description = description;
 		this.price = price;
@@ -24,7 +26,7 @@ public class Product
 	/**
 	 * @return the description
 	 */
-	public String getDescription()
+	String getDescription()
 	{
 		return description;
 	}
@@ -32,7 +34,7 @@ public class Product
 	/**
 	 * @return the price
 	 */
-	public double getPrice()
+	double getPrice()
 	{
 		return price;
 	}
@@ -40,7 +42,7 @@ public class Product
 	/**
 	 * @return the quantity
 	 */
-	public int getQuantity()
+	int getQuantity()
 	{
 		return quantity;
 	}
@@ -48,7 +50,7 @@ public class Product
 	/**
 	 * @param quantity the quantity to set
 	 */
-	public void setQuantity(int quantity)
+	void setQuantity(int quantity)
 	{
 		this.quantity = quantity;
 	}
