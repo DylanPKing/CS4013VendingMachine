@@ -9,24 +9,26 @@ import javafx.geometry.Pos;
 import javafx.geometry.VPos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout;
+import javafx.scene.layout.*;
 import javafx.scene.Scene;
 import javafx.scene.text.Text;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.FontPosture;
+import javafx.stage.Stage;
+import java.io.*;
 
 /**
  * VendingMachineSimulation
  */
 public class VendingMachineSimulation extends Application
 {
-	public static void main(String[] args)
-	{
-		// Make the initial menu for the machine.
-		VendingMachine machine = new VendingMachine();
-		VendingMachineMenu menu = new VendingMachineMenu();
+	// Make the initial menu for the machine.
+	public static VendingMachine machine = new VendingMachine();
+	public static VendingMachineMenu menu = new VendingMachineMenu();
 
+	public static void main(String[] args)  throws IOException
+	{
 		//Run the machine
 		menu.readFiles(machine);
 		launch(args);
@@ -41,8 +43,8 @@ public class VendingMachineSimulation extends Application
 	{
 		// Set up the grid pane
 		GridPane choice = new GridPane();
-		panel.setPadding(new Insets(20, 20, 20, 20));
-		panel.setAlignment(Pos.CENTER);
+		choice.setPadding(new Insets(20, 20, 20, 20));
+		choice.setAlignment(Pos.CENTER);
 
 		// Set up text
 		Text question = new Text("Select your prefered UI");
@@ -68,7 +70,7 @@ public class VendingMachineSimulation extends Application
 			@Override
 			public void handle(ActionEvent event)
 			{
-				menu.runCMD();
+				menu.runCMD(machine);
 			}
 		});
 
@@ -78,7 +80,7 @@ public class VendingMachineSimulation extends Application
 			@Override
 			public void handle(ActionEvent event)
 			{
-				menu.runGUI();
+				//menu.runGUI();
 			}
 		});
 		

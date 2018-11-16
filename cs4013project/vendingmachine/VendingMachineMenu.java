@@ -167,7 +167,7 @@ class VendingMachineMenu
 		{
 			pr.println(machine.products.get(i).getDescription() + "," +
 					   machine.products.get(i).getPrice() + "," + 
-					   machine.productQuantity.get(i));
+					   machine.prodQuantity.get(i));
 			fr.close();
 			pr.close();
 		}
