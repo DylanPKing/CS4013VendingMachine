@@ -80,6 +80,7 @@ class VendingMachine
      * Finds the value of all coins in the machine
      * Removes these from the machine
      * Resets the quantity of each coin to 0
+     * @return double total (total money in the machine)
      */
     double removeMoney()
     {
