@@ -10,7 +10,6 @@ class Product
 
 	private String description;
 	private double price;
-	private int quantity;
 
 	/**
      * Constructs a Product object
@@ -37,22 +36,6 @@ class Product
 	double getPrice()
 	{
 		return price;
-	}
-
-	/**
-	 * @return the quantity
-	 */
-	int getQuantity()
-	{
-		return quantity;
-	}
-
-	/**
-	 * @param quantity the quantity to set
-	 */
-	void setQuantity(int quantity)
-	{
-		this.quantity = quantity;
 	}
 
 	@Override
