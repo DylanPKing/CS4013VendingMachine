@@ -59,9 +59,9 @@ class VendingMachineMenu
 			else if (command.equalsIgnoreCase("A") && !operator)
 				accessOperatorMode();
 			else if (command.equalsIgnoreCase("A") && operator)
-				addNewProduct();
+				addNewProduct(machine);
 			else if (command.equalsIgnoreCase("R") && operator)
-				System.out.println(removeCurrentCoins());
+				System.out.println(removeCurrentCoins(machine));
 			else if (command.equalsIgnoreCase("Q"))
 				running = false;
 		}
@@ -115,7 +115,7 @@ class VendingMachineMenu
 		in.close();
 	}
 
-	private void addNewProduct()
+	private void addNewProduct(VendingMachine machine)
 	{
 		if (!gui)
 		{
@@ -148,11 +148,11 @@ class VendingMachineMenu
 		}
 		else
 		{
-			
+
 		}
 	}
 
-	private String removeCurrentCoins()
+	private String removeCurrentCoins(VendingMachine machine)
 	{
 		return "Removed: " + machine.removeMoney();
 	}

@@ -81,7 +81,7 @@ class VendingMachine
      * Removes these from the machine
      * Resets the quantity of each coin to 0
      */
-    void removeMoney()
+    double removeMoney()
     {
         double total = 0;
         for (int i = 0; i < coins.size(); i++)
@@ -95,6 +95,7 @@ class VendingMachine
         {
             coinQuantity.set(i, 0);
         }
+        return total;
     }
 
     /**
@@ -116,7 +117,7 @@ class VendingMachine
         {
             for (int i = 0; i < products.size(); i++)
             {
-                if (product.get(i).getDescription() == toAdd.getDescription())
+                if (products.get(i).getDescription() == toAdd.getDescription())
                 {
                     prodQuantity.set(i, prodQuantity.get(i) + 1);
                 }
