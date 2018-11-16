@@ -62,9 +62,9 @@ class VendingMachine
             {
                 currentTotal += currentCoins.get(i).getValue();
             }
-            //Display Insufficient funds, returning currentTotal
             currentBalance = 0;
             currentCoins.clear();
+            throw new VendingException("Insufficient funds");
         }
     }
 
@@ -79,7 +79,6 @@ class VendingMachine
                 total += coins.get(i).getValue();
             }
         }
-        //Code to display "Removed total"
         for (int i = 0; i < coinQuantity.size(); i++)
         {
             coinQuantity.set(i, 0);
