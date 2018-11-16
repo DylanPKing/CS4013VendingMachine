@@ -68,8 +68,8 @@ class VendingMachineMenu
 
 	/**
 	 * Reads from the Products, Money and Operator files.
-	 *Adds products and coins to their arraylists as well as adding their quantities to their own arraylists.
-	 *Separates operator details for use in another method.
+	 * Adds products and coins to their arraylists as well as adding their quantities to their own arraylists.
+	 * Separates operator details for use in another method.
 	 * @param machine the Vending Machine currently in use.
 	 * @throws IOException
 	 */
@@ -146,7 +146,8 @@ class VendingMachineMenu
 	}
 
 	/**
-	 * Writes the product objects and their quantities to file, as well as writing the coin objects and their quantities to file.
+	 * Writes the product objects and their quantities to file, as well as writing the
+	 * coin objects and their quantities to file.
 	 * @param machine the Vending Machine currently in use.
 	 * @throws IOException
 	 */
