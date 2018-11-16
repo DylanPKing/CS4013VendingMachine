@@ -5,6 +5,8 @@ import java.io.*;
 
 /**
  * VendingMachineMenu
+ * @author Dylan King 17197813
+ * @author Brian Malone 17198178
  */
 class VendingMachineMenu
 {
