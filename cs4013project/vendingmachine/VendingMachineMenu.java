@@ -10,6 +10,7 @@ class VendingMachineMenu
 
 	private boolean gui;
 	private boolean operator;
+	private String operatorPassword;
 
 	VendingMachineMenu()
 	{
@@ -25,19 +26,44 @@ class VendingMachineMenu
 		while (running)
 		{
 			Scanner in = new Scanner(System.in);
-			
+			System.out.println(showOptions());
 			String command = in.nextLine();
 			in.close();
 
 			if (command.equalsIgnoreCase("S"))
-			{
-				for (Product p : machine.getProductTypes()){}
-				
-			}
+				System.out.print(showProducts(machine.products));
 			else if (command.equalsIgnoreCase("I"))
 			{
-				machine.addCoin((Coin)getChoice(coins));
+				try
+				{
+					machine.addCoin((Coin)getChoice(machine.coins.toArray()));
+				}
+				catch (VendingException ex)
+				{
+					System.out.println(ex.getMessage());
+				}
 			}
+			else if (command.equalsIgnoreCase("B"))
+			{
+				try
+				{
+					Product p = (Product)getChoice(machine.products.toArray());
+					machine.buyProduct(p);
+					System.out.println("Purchased: " + p);
+				}
+				catch (VendingException ex)
+				{
+					System.out.println(ex.getMessage());
+				}
+			}
+			else if (command.equalsIgnoreCase("A") && !operator)
+				accessOperatorMode();
+			else if (command.equalsIgnoreCase("A") && operator)
+				addNewProduct();
+			else if (command.equalsIgnoreCase("R") && operator)
+				System.out.println(removeCurrentCoins());
+			else if (command.equalsIgnoreCase("Q"))
+				running = false;
 		}
 	}
 
@@ -46,27 +72,112 @@ class VendingMachineMenu
 
 	}
 
-	private void getChoice(ArrayList<Object> choices)
+	private String showOptions()
 	{
-		boolean choiceMade = false;
-		while (!choiceMade)
+		String output = "(S)how products\n" +
+						"(I)nsert coin\n" +
+						"(B)uy product\n";
+		if (operator)
 		{
-			for (int i = 0; i < choices.size(); i++)
+			output += "(A)dd products\n" +
+					  "(R)emove coins\n";
+		}
+		else
+		{
+			output += "(A)ccess operator mode\n";
+		}
+		return output + "(Q)uit";
+	}
+
+	private String showProducts(ArrayList<Product> products)
+	{
+		String output = "";
+		for (Product p : products)
+			output += p + "\n";
+		return output;
+	}
+
+	private void accessOperatorMode()
+	{
+		if (!gui)
+		{
+			System.out.print("Enter operator password:\t");
+		}
+		else
+		{
+
+		}
+		Scanner in = new Scanner(System.in);
+		if (in.nextLine().equals(operatorPassword))
+		{
+			operator = true; 
+		}
+		in.close();
+	}
+
+	private void addNewProduct()
+	{
+		if (!gui)
+		{
+			System.out.print("Enter description: ");
+			Scanner in = new Scanner(System.in);
+			String description = in.nextLine();
+			boolean valid = false;
+			while (!valid)
 			{
-				if (!gui)
+				System.out.print("Enter price: ");
+				String input = in.nextLine();
+				if (input.matches("\\d*.?\\d+"))
 				{
-					System.out.printf("%d) %s", i + 1, choices.get(i));
+					double price = Double.parseDouble(input);
+					System.out.print("Enter quantity: ");
+					input = in.nextLine();
+					if (input.matches("\\d+"))
+					{
+						int quantity = Integer.parseInt(input);
+						if (quantity > 0)
+						{
+							machine.addProduct(new Product(description, price), quantity);
+							valid = true;
+						}
+					}
 				}
 				else
-				{
-					
-				}
-				Scanner in = new Scanner(System.in);
-				String inputStr = in.nextLine();
-				int input = (inputStr.matches("\\d+") ? Integer.parseInt(inputStr) : -1);
-				in.close();
+					System.out.println("Invalid price.");
+			}
+		}
+		else
+		{
+			
+		}
+	}
+
+	private String removeCurrentCoins()
+	{
+		return "Removed: " + machine.removeMoney();
+	}
+
+	private Object getChoice(Object[] choices)
+	{
+		for (int i = 0; i < choices.length; i++)
+		{
+			if (!gui)
+			{
+				System.out.printf("%d) %s", i + 1, choices[i]);
+			}
+			else
+			{
 				
 			}
 		}
+		Scanner in = new Scanner(System.in);
+		String inputStr = in.nextLine();
+		int input = (inputStr.matches("\\d+") ? Integer.parseInt(inputStr) : -1);
+		in.close();
+		if (input < 1 || input > choices.length)
+		{
+			throw new VendingException("Invalid choice.");
+		}
+		return choices[input];
 	}
 }
