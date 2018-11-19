@@ -67,6 +67,14 @@ class VendingMachineMenu
 	}
 
 	/**
+	 * @Szymon just testing if code crashes when it gets here...
+	 */
+	void runGUI()
+	{
+		System.out.println("Got here!");
+	}
+
+	/**
 	 * Reads from the Products, Money and Operator files.
 	 * Adds products and coins to their arraylists as well as adding their quantities to their own arraylists.
 	 * Separates operator details for use in another method.

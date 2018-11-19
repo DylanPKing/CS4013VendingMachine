@@ -70,25 +70,17 @@ public class VendingMachineSimulation extends Application
 		Scene welcomeScreen = new Scene(choice, 300, 200);
 
 		// Set up the action listener for the cmd button
-		cmdButton.setOnAction(new EventHandler<ActionEvent>()
+		cmdButton.setOnAction(event ->
 		{
-			@Override
-			public void handle(ActionEvent event)
-			{
-				primaryStage.close();
-				menu.runCMD(machine);
-			}
+			primaryStage.close();
+			menu.runCMD(machine);
 		});
 
 		// Set up the action listener for the gui button
-		guiButton.setOnAction(new EventHandler<ActionEvent>()
+		guiButton.setOnAction(event ->
 		{
-			@Override
-			public void handle(ActionEvent event)
-			{
-				primaryStage.close();
-				//menu.runGUI();
-			}
+			primaryStage.close();
+			menu.runGUI();
 		});
 		
 		// Set up the Stage
