@@ -38,6 +38,7 @@ public class VendingMachineSimulation extends Application
 
 	/**
 	 * This is the start for the GUI interface.
+	 * @author Szymon Sztyrmer
 	 */
 	public void start(Stage primaryStage)
 	{
@@ -49,11 +50,13 @@ public class VendingMachineSimulation extends Application
 		// Set up text
 		Text question = new Text("Select your prefered UI");
 		Text emptySpace = new Text(" ");
-		question.setFont(Font.font("Comic Sans"));
+		//question.setFont(Font.font("Comic Sans MS"));
 
 		// Set up buttons
 		Button cmdButton = new Button("Command Line Interface");
 		Button guiButton = new Button("Graphical User Interface");
+	  //cmdButton.setFont(Font.font("Comic Sans MS"));
+		//guiButton.setFont(Font.font("Comic Sans MS"));
 
 		// Make the buttons wide
 		cmdButton.setMaxWidth(Double.MAX_VALUE);
