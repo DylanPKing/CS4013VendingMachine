@@ -150,18 +150,15 @@ class VendingMachineMenu extends Application
 		Scanner in = new Scanner(product);
 		while(in.hasNext())
 		{
-			//for(int i = 0; i < machine.products.size(); i++)
-			//{
-				lineFromFile = (in.nextLine().split(","));
-				productName = lineFromFile[0];
-				productPrice = Double.parseDouble(lineFromFile[1]);
-				quantity = Integer.parseInt(lineFromFile[2]);
+			lineFromFile = (in.nextLine().split(","));
+			productName = lineFromFile[0];
+			productPrice = Double.parseDouble(lineFromFile[1]);
+			quantity = Integer.parseInt(lineFromFile[2]);
 				
-				Product someProduct = new Product(productName, productPrice);
-				machine.products.add(someProduct);
+			Product someProduct = new Product(productName, productPrice);
+			machine.products.add(someProduct);
 				
-				machine.prodQuantity.add(quantity);
-			//}
+			machine.prodQuantity.add(quantity);
 		}
 		in.close();
 		
@@ -169,18 +166,15 @@ class VendingMachineMenu extends Application
 		in = new Scanner(coin);
 		while(in.hasNext())
 		{
-			for(int i = 0; i < machine.coins.size(); i++)
-			{
-				lineFromFile = (in.nextLine().split(","));
-				coinName = lineFromFile[0];
-				coinValue = Double.parseDouble(lineFromFile[1]);
-				quantity = Integer.parseInt(lineFromFile[2]);
+			lineFromFile = (in.nextLine().split(","));
+			coinName = lineFromFile[0];
+			coinValue = Double.parseDouble(lineFromFile[1]);
+			quantity = Integer.parseInt(lineFromFile[2]);
 				
-				Coin aCoin = new Coin(coinValue,coinName);
-				machine.coins.add(aCoin);
+			Coin aCoin = new Coin(coinValue,coinName);
+			machine.coins.add(aCoin);
 				
-				machine.coinQuantity.add(quantity);
-			}
+			machine.coinQuantity.add(quantity);
 		}
 		in.close();
 		
