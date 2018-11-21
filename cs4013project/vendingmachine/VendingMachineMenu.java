@@ -13,7 +13,6 @@ class VendingMachineMenu
 
 	boolean gui;
 	private boolean operator;
-	private String operatorPassword;
 	private Scanner in = new Scanner(System.in);
 
 	/**
@@ -31,12 +30,12 @@ class VendingMachineMenu
 			//in.close();
 
 			if (command.equalsIgnoreCase("S"))
-				System.out.print(showProducts(machine.products));
+				System.out.print(showProducts(machine.getProducts()));
 			else if (command.equalsIgnoreCase("I"))
 			{
 				try
 				{
-					machine.addCoin((Coin)getChoice(machine.coins.toArray()));
+					machine.addCoin((Coin)getChoice(machine.getCoins().toArray()));
 				}
 				catch (VendingException ex)
 				{
@@ -47,7 +46,7 @@ class VendingMachineMenu
 			{
 				try
 				{
-					Product p = (Product)getChoice(machine.products.toArray());
+					Product p = (Product)getChoice(machine.getProducts().toArray());
 					machine.buyProduct(p);
 					System.out.println("Purchased: " + p);
 				}
@@ -57,7 +56,7 @@ class VendingMachineMenu
 				}
 			}
 			else if (command.equalsIgnoreCase("A") && !operator)
-				accessOperatorMode();
+				accessOperatorMode(machine.getOperatorPassword());
 			else if (command.equalsIgnoreCase("A") && operator)
 				addNewProduct(machine);
 			else if (command.equalsIgnoreCase("R") && operator)
@@ -76,11 +75,11 @@ class VendingMachineMenu
 	 */
 	void readFiles(VendingMachine machine) throws IOException
 	{
-		machine.coins = new ArrayList<Coin>();
-		machine.products = new ArrayList<Product>();
+		ArrayList<Coin> coins = machine.getCoins();
+		ArrayList<Product> products = machine.getProducts();
 		
-		machine.prodQuantity = new ArrayList<Integer>();
-		machine.coinQuantity = new ArrayList<Integer>();
+		ArrayList<Integer> prodQuantity = machine.getProdQuantity();
+		ArrayList<Integer> coinQuantity = machine.getCoinQuantity();
 		
 		File product = new File("./Products.csv");
 		File coin = new File("./Money.csv");
@@ -94,8 +93,6 @@ class VendingMachineMenu
 		String coinName = "";
 		double coinValue = 0.0;
 		
-		String operatorName ="";
-		String operatorPassword ="";
 		
 		//Reads products and adds all products to the products ArrayList, it adds the quantity to it's own product quantity ArrayList
 		Scanner in = new Scanner(product);
@@ -107,9 +104,9 @@ class VendingMachineMenu
 			quantity = Integer.parseInt(lineFromFile[2]);
 				
 			Product someProduct = new Product(productName, productPrice);
-			machine.products.add(someProduct);
+			products.add(someProduct);
 				
-			machine.prodQuantity.add(quantity);
+			prodQuantity.add(quantity);
 		}
 		in.close();
 		
@@ -123,9 +120,9 @@ class VendingMachineMenu
 			quantity = Integer.parseInt(lineFromFile[2]);
 				
 			Coin aCoin = new Coin(coinValue,coinName);
-			machine.coins.add(aCoin);
+			coins.add(aCoin);
 				
-			machine.coinQuantity.add(quantity);
+			coinQuantity.add(quantity);
 		}
 		in.close();
 		
@@ -134,8 +131,7 @@ class VendingMachineMenu
 		while(in.hasNext())
 		{
 			lineFromFile =(in.nextLine().split(","));
-			operatorName = lineFromFile[0];
-			operatorPassword = lineFromFile[1];
+			machine.setOperatorPassword(lineFromFile[1]);
 		}
 		in.close();
 	}
@@ -151,30 +147,35 @@ class VendingMachineMenu
 		File coin = new File("./Coins.csv");
 		File product = new File("./Products.csv");
 		
-		FileWriter fr = new FileWriter(product, true);
+		FileWriter fr = new FileWriter(product);
 		PrintWriter pr = new PrintWriter(fr);
 		
-		FileWriter fr1 = new FileWriter(coin, true);
+		FileWriter fr1 = new FileWriter(coin);
 		PrintWriter pr1 = new PrintWriter(fr1);
 		
+		ArrayList<Product> products = machine.getProducts();
+		ArrayList<Integer> prodQuantity = machine.getProdQuantity();
 		
-		for(int i =0; i < machine.products.size();i++)
+		for(int i =0; i < products.size();i++)
 		{
-			pr.println(machine.products.get(i).getDescription() + "," +
-					   machine.products.get(i).getPrice() + "," + 
-					   machine.prodQuantity.get(i));
-			fr.close();
-			pr.close();
+			pr.println(products.get(i).getDescription() + "," +
+					   products.get(i).getPrice() + "," + 
+					   prodQuantity.get(i));
 		}
+		fr.close();
+		pr.close();
 		
-		for(int i = 0; i < machine.coins.size();i++)
+		ArrayList<Coin> coins = machine.getCoins();
+		ArrayList<Integer> coinQuantity = machine.getCoinQuantity();
+
+		for(int i = 0; i < coins.size();i++)
 		{
-			pr1.print(machine.coins.get(i).getName() + "," +
-					  machine.coins.get(i).getValue() + "," +
-					  machine.coinQuantity.get(i));
-			fr1.close();
-			pr1.close();
+			pr1.print(coins.get(i).getName() + "," +
+					  coins.get(i).getValue() + "," +
+					  coinQuantity.get(i));
 		}
+		fr1.close();
+		pr1.close();
 	}
 
 	/**
@@ -214,21 +215,17 @@ class VendingMachineMenu
 	/**
 	 * Offers a password input for the user to access operator mode.]
 	 */
-	private void accessOperatorMode()
+	private void accessOperatorMode(String operatorPassword)
 	{
 		if (!gui)
-		{
 			System.out.print("Enter operator password:\t");
-		}
 		else
 		{
 
 		}
 		//Scanner in = new Scanner(System.in);
 		if (in.nextLine().equals(operatorPassword))
-		{
 			operator = true; 
-		}
 		//in.close();
 	}
 
@@ -291,9 +288,7 @@ class VendingMachineMenu
 		for (int i = 0; i < choices.length; i++)
 		{
 			if (!gui)
-			{
 				System.out.printf("%d) %s\n", i + 1, choices[i]);
-			}
 			else
 			{
 				
@@ -303,10 +298,8 @@ class VendingMachineMenu
 		String inputStr = in.nextLine();
 		int input = (inputStr.matches("\\d+") ? Integer.parseInt(inputStr) : -1);
 		//in.close();
-		if (input < 1 || input > choices.length)
-		{
+		if (input < 0 || input > choices.length)
 			throw new VendingException("Invalid choice.");
-		}
-		return choices[input];
+		return choices[input - 1];
 	}
 }

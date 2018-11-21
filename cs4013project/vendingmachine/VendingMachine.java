@@ -7,18 +7,65 @@ import java.util.*;
  */
 class VendingMachine
 {
-    ArrayList<Product> products;
-    ArrayList<Integer> prodQuantity;
-    ArrayList<Coin> coins;
-    ArrayList<Integer> coinQuantity;
-    ArrayList<Coin> currentCoins;
-    double currentBalance;
+    private ArrayList<Product> products;
+    private ArrayList<Integer> prodQuantity;
+    private ArrayList<Coin> coins;
+    private ArrayList<Integer> coinQuantity;
+    private ArrayList<Coin> currentCoins;
+    private double currentBalance;
+    private String operatorPassword;
     /**
      * Constructor
      */
     VendingMachine() 
     {
+        products = new ArrayList<Product>();
+        prodQuantity = new ArrayList<Integer>();
+        coins = new ArrayList<Coin>();
+        coinQuantity = new ArrayList<Integer>();
+        currentCoins = new ArrayList<Coin>();
+    }
 
+    /**
+     * @return the products
+     */
+    ArrayList<Product> getProducts() {
+        return products;
+    }
+
+    /**
+     * @return the coins
+     */
+    ArrayList<Coin> getCoins() {
+        return coins;
+    }
+
+    /**
+     * @return the prodQuantity
+     */
+    ArrayList<Integer> getProdQuantity() {
+        return prodQuantity;
+    }
+
+    /**
+     * @return the coinQuantity
+     */
+    ArrayList<Integer> getCoinQuantity() {
+        return coinQuantity;
+    }
+
+    /**
+     * @return the operatorPassword
+     */
+    String getOperatorPassword() {
+        return operatorPassword;
+    }
+
+    /**
+     * @param operatorPassword the operatorPassword to set
+     */
+    void setOperatorPassword(String operatorPassword) {
+        this.operatorPassword = operatorPassword;
     }
 
     /**
