@@ -55,7 +55,7 @@ public class VendingMachineSimulation extends Application
 		// Set up buttons
 		Button cmdButton = new Button("Command Line Interface");
 		Button guiButton = new Button("Graphical User Interface");
-	  //cmdButton.setFont(Font.font("Comic Sans MS"));
+	    //cmdButton.setFont(Font.font("Comic Sans MS"));
 		//guiButton.setFont(Font.font("Comic Sans MS"));
 
 		// Make the buttons wide

@@ -24,12 +24,13 @@ import javafx.stage.Stage;
  * @author Dylan King 17197813
  * @author Brian Malone 17198178
  */
-class VendingMachineMenu extends Application
+class VendingMachineMenu extends VendingMachineSimulation
 {
 
 	private boolean gui;
 	private boolean operator;
 	private String operatorPassword;
+	private Scanner in = new Scanner(System.in);
 
 	/**
 	 * The commandline interface for the vending machine.
@@ -40,10 +41,10 @@ class VendingMachineMenu extends Application
 		boolean running = true;
 		while (running)
 		{
-			Scanner in = new Scanner(System.in);
+			//Scanner in = new Scanner(System.in);
 			System.out.println(showOptions());
 			String command = in.nextLine();
-			in.close();
+			//in.close();
 
 			if (command.equalsIgnoreCase("S"))
 				System.out.print(showProducts(machine.products));
@@ -273,12 +274,12 @@ class VendingMachineMenu extends Application
 		{
 
 		}
-		Scanner in = new Scanner(System.in);
+		//Scanner in = new Scanner(System.in);
 		if (in.nextLine().equals(operatorPassword))
 		{
 			operator = true; 
 		}
-		in.close();
+		//in.close();
 	}
 
 	private void addNewProduct(VendingMachine machine)
@@ -286,7 +287,7 @@ class VendingMachineMenu extends Application
 		if (!gui)
 		{
 			System.out.print("Enter description: ");
-			Scanner in = new Scanner(System.in);
+			//Scanner in = new Scanner(System.in);
 			String description = in.nextLine();
 			boolean valid = false;
 			while (!valid)
@@ -311,7 +312,7 @@ class VendingMachineMenu extends Application
 				else
 					System.out.println("Invalid price.");
 			}
-			in.close();
+			//in.close();
 		}
 		else
 		{
@@ -341,17 +342,17 @@ class VendingMachineMenu extends Application
 		{
 			if (!gui)
 			{
-				System.out.printf("%d) %s", i + 1, choices[i]);
+				System.out.printf("%d) %s\n", i + 1, choices[i]);
 			}
 			else
 			{
 				
 			}
 		}
-		Scanner in = new Scanner(System.in);
+		//Scanner in = new Scanner(System.in);
 		String inputStr = in.nextLine();
 		int input = (inputStr.matches("\\d+") ? Integer.parseInt(inputStr) : -1);
-		in.close();
+		//in.close();
 		if (input < 1 || input > choices.length)
 		{
 			throw new VendingException("Invalid choice.");
