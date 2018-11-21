@@ -2,32 +2,16 @@ package cs4013project.vendingmachine;
 
 import java.util.*;
 import java.io.*;
-import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.geometry.HPos;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
-import javafx.geometry.VPos;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.layout.*;
-import javafx.scene.Scene;
-import javafx.scene.text.Text;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
-import javafx.scene.text.FontPosture;
-import javafx.stage.Stage;
 
 /**
  * VendingMachineMenu
  * @author Dylan King 17197813
  * @author Brian Malone 17198178
  */
-class VendingMachineMenu extends VendingMachineSimulation
+class VendingMachineMenu
 {
 
-	private boolean gui;
+	boolean gui;
 	private boolean operator;
 	private String operatorPassword;
 	private Scanner in = new Scanner(System.in);
@@ -81,40 +65,6 @@ class VendingMachineMenu extends VendingMachineSimulation
 			else if (command.equalsIgnoreCase("Q"))
 				running = false;
 		}
-	}
-
-	/**
-	 * @Szymon just testing if code crashes when it gets here...
-	 */
-	void runGUI()
-	{
-		boolean running = true;
-		// Set the gui boolean to true.
-		gui = true;
-
-		// Set up the stage.
-		Stage mainMenu = new Stage();
-		mainMenu.setTitle("Main Menu");
-
-		//Set up a main pane
-		GridPane options = new GridPane();
-		options.setPadding(new Insets(5, 5, 5, 5));
-		options.setAlignment(Pos.CENTER);
-
-		//Set up a bunch of small panes for formating.
-		StackPane instructionHolder = new StackPane();
-
-		// Set up text for the display.
-		Text instruction = new Text("Please select what you would like to do?"); // main instruction
-		//instruction.setFont(Font.font("Comic Sans MS")); Because I was told we're not doing comic sans :-(
-
-		// Set up buttons.
-
-		while(running)
-		{
-
-		}
-		System.out.println("Got here!");
 	}
 
 	/**

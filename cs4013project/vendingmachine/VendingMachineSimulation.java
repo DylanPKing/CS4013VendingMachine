@@ -26,6 +26,7 @@ public class VendingMachineSimulation extends Application
 	// Make the initial menu for the machine.
 	public static VendingMachine machine = new VendingMachine();
 	public static VendingMachineMenu menu = new VendingMachineMenu();
+	public static VendingMachineGUI guiMenu = new VendingMachineGUI();
 
 	public static void main(String[] args)  throws IOException
 	{
@@ -83,7 +84,7 @@ public class VendingMachineSimulation extends Application
 		guiButton.setOnAction(event ->
 		{
 			primaryStage.close();
-			menu.runGUI();
+			guiMenu.runGUI(menu);
 		});
 		
 		// Set up the Stage
