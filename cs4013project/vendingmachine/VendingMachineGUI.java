@@ -2,7 +2,6 @@ package cs4013project.vendingmachine;
 
 import java.util.*;
 
-import javax.lang.model.util.ElementScanner6;
 
 import java.io.*;
 import javafx.application.Application;
@@ -14,6 +13,7 @@ import javafx.geometry.Pos;
 import javafx.geometry.VPos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
 import javafx.scene.Scene;
 import javafx.scene.text.Text;
@@ -112,27 +112,90 @@ public class VendingMachineGUI extends VendingMachineSimulation implements Vendi
 	}
 
 	@Override
-	public String showOptions() {
+	public String showOptions() 
+	{
 		return null;
 	}
 
 	@Override
-	public String showProducts(ArrayList<Product> products) {
+	public String showProducts(ArrayList<Product> products) 
+	{
 		return VendingMachineMenu.super.showProducts(products);
 	}
 
+	/**
+	 * This method allows the user to enter operator mode.
+	 * @author Szymon Sztyrmer
+	 * @param operatorPassword
+	 */
 	@Override
-	public void accessOperatorMode(String operatorPassword) {
-		System.out.println("Access Operator? Why would you want that?");
+	public void accessOperatorMode(String operatorPassword) 
+	{
+		// Make the initial stage for the text entering mechanism.
+		Stage enterPassword = new Stage();
+
+		// The panes imma be using.
+		HBox fullPane = new HBox();
+		StackPane information = new StackPane();
+		StackPane enterText = new StackPane();
+		StackPane ok = new StackPane();
+
+		// Set up of HBox
+		//fullPane.setAlignment(Pos.CENTER);
+		fullPane.setSpacing(5);
+
+		// The actual text
+		Text txtInformation = new Text("Please enter the operator password");
+		Text empty = new Text();
+
+		// The typing field
+		TextField txtEnterText = new TextField();
+		txtEnterText.setEditable(true);
+
+		// The button
+		Button btOk = new Button("Ok");
+
+		// Action Listener
+		
+		txtEnterText.focusedProperty().addListener((arg0, oldValue, newValue) ->
+		{
+			if(!newValue)
+			{
+				if(!txtEnterText.getText().matches(operatorPassword))
+					System.out.println("That is not the correct password"); // change this to a label
+				else
+					{
+						operator = true;
+						//close stage
+					}
+			}
+		});
+		
+		// The assembly
+		information.getChildren().add(txtInformation);
+		enterText.getChildren().add(txtEnterText);
+		ok.getChildren().add(btOk);
+		fullPane.getChildren().addAll(information, enterText, ok);
+
+		// Time for scene
+		Scene screen = new Scene(fullPane, 400, 100);
+
+		// Put together
+		enterPassword.setTitle("Operator Menu");
+		enterPassword.setScene(screen);
+		enterPassword.show();
+
 	}
 
 	@Override
-	public void addNewProduct(VendingMachine machine) {
+	public void addNewProduct(VendingMachine machine) 
+	{
 		
 	}
 
 	@Override
-	public Object getChoice(Object[] choices) {
+	public Object getChoice(Object[] choices)
+	{
 		return null;
 	}
 }
