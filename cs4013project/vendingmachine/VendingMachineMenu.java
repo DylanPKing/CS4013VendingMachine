@@ -215,7 +215,7 @@ class VendingMachineMenu
 	/**
 	 * Offers a password input for the user to access operator mode.]
 	 */
-	private void accessOperatorMode(String operatorPassword)
+	void accessOperatorMode(String operatorPassword)
 	{
 		if (!gui)
 			System.out.print("Enter operator password:\t");

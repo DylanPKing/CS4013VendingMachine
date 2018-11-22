@@ -84,7 +84,7 @@ public class VendingMachineSimulation extends Application
 		guiButton.setOnAction(event ->
 		{
 			primaryStage.close();
-			guiMenu.runGUI(menu);
+			guiMenu.runGUI(menu, machine);
 		});
 		
 		// Set up the Stage

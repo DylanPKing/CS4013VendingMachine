@@ -29,7 +29,7 @@ public class VendingMachineGUI extends VendingMachineSimulation
     /**
 	 * @Szymon just testing if code crashes when it gets here...
 	 */
-	void runGUI(VendingMachineMenu menu)
+	void runGUI(VendingMachineMenu menu, VendingMachine machine)
 	{
 		boolean running = true;
 		// Set the gui boolean to true.
@@ -40,9 +40,10 @@ public class VendingMachineGUI extends VendingMachineSimulation
 		mainMenu.setTitle("Main Menu");
 
 		//Set up a main pane
-		GridPane options = new GridPane();
-		options.setPadding(new Insets(5, 5, 5, 5));
-		options.setAlignment(Pos.CENTER);
+		VBox option = new VBox();
+		option.setPadding(new Insets(50, 50, 50, 50));
+		option.setSpacing(5);
+		option.setAlignment(Pos.CENTER);
 
 		//Set up a bunch of small panes for formating.
 		StackPane InstructionHolder = new StackPane();
@@ -77,28 +78,41 @@ public class VendingMachineGUI extends VendingMachineSimulation
 		RemoveCoins.getChildren().add(btRemoveCoins);
 		Quit.getChildren().add(btQuit);
 
+			
+
 		// Fill Up The grid.
-		if(!menu.operator)
+		option.getChildren().add(InstructionHolder);
+		if(menu.operator)
 		{
-			options.add(InstructionHolder, 1, 0);
-			options.add(ShowProducts, 0, 1);
-			options.add(Quit, 2, 1);
-			options.add(InsertCoin, 0, 2);
-			options.add(BuyProduct, 2, 2);
-			options.add(AccessOperatorMode, 1, 2);
+			option.getChildren().add(InstructionHolder);
+			option.getChildren().add(AddProducts);
+			option.getChildren().add(RemoveCoins);
 		}
 		else
-		{
-			options.add(InstructionHolder, 1, 0);
-			options.add(ShowProducts, 0, 1);
-			options.add(Quit, 2, 1);
-			options.add(InsertCoin, 0, 2);
-			options.add(BuyProduct, 2, 2);
-			options.add(AddProducts, 1, 2);
-			options.add(RemoveCoins, 1, 3);
-		}
+			option.getChildren().add(AccessOperatorMode);
 
+			option.getChildren().add(ShowProducts);
+			option.getChildren().add(BuyProduct);
+			option.getChildren().add(InsertCoin);
+			option.getChildren().add(Quit);
+
+		btAccessOperatorMode.setOnAction(event -> 
+		{
+			mainMenu.close();
+			menu.accessOperatorMode(machine.getOperatorPassword());
+		});
+
+		// Make the scene to put the pane into
+		Scene screen = new Scene(option, 300, 200);
+		// Populate the stage
+		mainMenu.setScene(screen);
+		mainMenu.show();
 		
 		System.out.println("Got here!");
+	}
+
+	void operatorMode()
+	{
+
 	}
 }
