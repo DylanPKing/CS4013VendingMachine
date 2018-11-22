@@ -4,8 +4,6 @@ import java.util.*;
 
 import javax.lang.model.util.ElementScanner6;
 
-import cs4013project.vendingmachine.VendingMachineSimulation;
-
 import java.io.*;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -24,7 +22,7 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.FontPosture;
 import javafx.stage.Stage;
 
-public class VendingMachineGUI extends VendingMachineSimulation
+public class VendingMachineGUI extends VendingMachineSimulation implements VendingMachineMenu
 {
     /**
 	 * @Szymon just testing if code crashes when it gets here...
@@ -111,8 +109,15 @@ public class VendingMachineGUI extends VendingMachineSimulation
 		System.out.println("Got here!");
 	}
 
-	void operatorMode()
-	{
+	
 
+	@Override
+	public void accessOperatorMode(String operatorPassword) {
+		
+	}
+
+	@Override
+	public Object getChoice(Object[] choices) {
+		return null;
 	}
 }

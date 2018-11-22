@@ -8,63 +8,8 @@ import java.io.*;
  * @author Dylan King 17197813
  * @author Brian Malone 17198178
  */
-class VendingMachineMenu
+interface VendingMachineMenu 
 {
-
-	boolean gui;
-	boolean operator;
-	private Scanner in = new Scanner(System.in);
-
-	/**
-	 * The commandline interface for the vending machine.
-	 * @param machine the Vending Machine currently in use.
-	 */
-	void runCMD(VendingMachine machine)
-	{
-		boolean running = true;
-		while (running)
-		{
-			//Scanner in = new Scanner(System.in);
-			System.out.println(showOptions());
-			String command = in.nextLine();
-			//in.close();
-
-			if (command.equalsIgnoreCase("S"))
-				System.out.print(showProducts(machine.getProducts()));
-			else if (command.equalsIgnoreCase("I"))
-			{
-				try
-				{
-					machine.addCoin((Coin)getChoice(machine.getCoins().toArray()));
-				}
-				catch (VendingException ex)
-				{
-					System.out.println(ex.getMessage());
-				}
-			}
-			else if (command.equalsIgnoreCase("B"))
-			{
-				try
-				{
-					Product p = (Product)getChoice(machine.getProducts().toArray());
-					machine.buyProduct(p);
-					System.out.println("Purchased: " + p);
-				}
-				catch (VendingException ex)
-				{
-					System.out.println(ex.getMessage());
-				}
-			}
-			else if (command.equalsIgnoreCase("A") && !operator)
-				accessOperatorMode(machine.getOperatorPassword());
-			else if (command.equalsIgnoreCase("A") && operator)
-				addNewProduct(machine);
-			else if (command.equalsIgnoreCase("R") && operator)
-				System.out.println(removeCurrentCoins(machine));
-			else if (command.equalsIgnoreCase("Q"))
-				running = false;
-		}
-	}
 
 	/**
 	 * Reads from the Products, Money and Operator files.
@@ -73,7 +18,7 @@ class VendingMachineMenu
 	 * @param machine the Vending Machine currently in use.
 	 * @throws IOException
 	 */
-	void readFiles(VendingMachine machine) throws IOException
+	default void readFiles(VendingMachine machine) throws IOException
 	{
 		ArrayList<Coin> coins = machine.getCoins();
 		ArrayList<Product> products = machine.getProducts();
@@ -142,7 +87,7 @@ class VendingMachineMenu
 	 * @param machine the Vending Machine currently in use.
 	 * @throws IOException
 	 */
-	void writeFiles(VendingMachine machine) throws IOException
+	default void writeFiles(VendingMachine machine) throws IOException
 	{
 		File coin = new File("./Coins.csv");
 		File product = new File("./Products.csv");
@@ -182,29 +127,14 @@ class VendingMachineMenu
 	 * Shows the options avaialable for the current user.
 	 * @return the available options
 	 */
-	private String showOptions()
-	{
-		String output = "(S)how products\n" +
-						"(I)nsert coin\n" +
-						"(B)uy product\n";
-		if (operator)
-		{
-			output += "(A)dd products\n" +
-					  "(R)emove coins\n";
-		}
-		else
-		{
-			output += "(A)ccess operator mode\n";
-		}
-		return output + "(Q)uit";
-	}
+	abstract String showOptions();
 
 	/**
 	 * Shows the currently available products for sale
 	 * @param products the ArrayList of currently avaialable products
 	 * @return the currently avialable products as a String.
 	 */
-	private String showProducts(ArrayList<Product> products)
+	default String showProducts(ArrayList<Product> products)
 	{
 		String output = "";
 		for (Product p : products)
@@ -215,57 +145,13 @@ class VendingMachineMenu
 	/**
 	 * Offers a password input for the user to access operator mode.]
 	 */
-	void accessOperatorMode(String operatorPassword)
-	{
-		if (!gui)
-			System.out.print("Enter operator password:\t");
-		else
-		{
+	abstract void accessOperatorMode(String operatorPassword);
 
-		}
-		//Scanner in = new Scanner(System.in);
-		if (in.nextLine().equals(operatorPassword))
-			operator = true; 
-		//in.close();
-	}
-
-	private void addNewProduct(VendingMachine machine)
-	{
-		if (!gui)
-		{
-			System.out.print("Enter description: ");
-			//Scanner in = new Scanner(System.in);
-			String description = in.nextLine();
-			boolean valid = false;
-			while (!valid)
-			{
-				System.out.print("Enter price: ");
-				String input = in.nextLine();
-				if (input.matches("\\d*.?\\d+"))
-				{
-					double price = Double.parseDouble(input);
-					System.out.print("Enter quantity: ");
-					input = in.nextLine();
-					if (input.matches("\\d+"))
-					{
-						int quantity = Integer.parseInt(input);
-						if (quantity > 0)
-						{
-							machine.addProduct(new Product(description, price), quantity);
-							valid = true;
-						}
-					}
-				}
-				else
-					System.out.println("Invalid price.");
-			}
-			//in.close();
-		}
-		else
-		{
-
-		}
-	}
+	/**
+	 * Adds a new product to the vending machine, only accessible by the administrator
+	 * @param machine the vending machine the product is being added to.
+	 */
+	abstract void addNewProduct(VendingMachine machine);
 
 	/**
 	 * Prints the amount of coins removed from the machine,
@@ -273,7 +159,7 @@ class VendingMachineMenu
 	 * @param machine the vending machine in use
 	 * @return The sum of the coins removed.
 	 */
-	private String removeCurrentCoins(VendingMachine machine)
+	default String removeCurrentCoins(VendingMachine machine)
 	{
 		return "Removed: " + machine.removeMoney();
 	}
@@ -283,23 +169,5 @@ class VendingMachineMenu
 	 * @param choices Object array of the coins/products
 	 * @return the choice made by the user.
 	 */
-	private Object getChoice(Object[] choices)
-	{
-		for (int i = 0; i < choices.length; i++)
-		{
-			if (!gui)
-				System.out.printf("%d) %s\n", i + 1, choices[i]);
-			else
-			{
-				
-			}
-		}
-		//Scanner in = new Scanner(System.in);
-		String inputStr = in.nextLine();
-		int input = (inputStr.matches("\\d+") ? Integer.parseInt(inputStr) : -1);
-		//in.close();
-		if (input < 0 || input > choices.length)
-			throw new VendingException("Invalid choice.");
-		return choices[input - 1];
-	}
+	abstract Object getChoice(Object[] choices);
 }
