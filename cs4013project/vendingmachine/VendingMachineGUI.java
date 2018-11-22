@@ -99,7 +99,7 @@ public class VendingMachineGUI extends VendingMachineSimulation implements Vendi
 		btAccessOperatorMode.setOnAction(event -> 
 		{
 			mainMenu.close();
-			menu.accessOperatorMode(machine.getOperatorPassword());
+			accessOperatorMode(machine.getOperatorPassword());
 		});
 
 		// Make the scene to put the pane into
@@ -123,7 +123,7 @@ public class VendingMachineGUI extends VendingMachineSimulation implements Vendi
 
 	@Override
 	public void accessOperatorMode(String operatorPassword) {
-		
+		System.out.println("Access Operator? Why would you want that?");
 	}
 
 	@Override
