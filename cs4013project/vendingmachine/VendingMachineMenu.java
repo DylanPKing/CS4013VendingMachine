@@ -12,6 +12,12 @@ interface VendingMachineMenu
 {
 
 	/**
+	 * The interface for the vending machine.
+	 * @param machine the Vending Machine currently in use.
+	 */
+	abstract void run(VendingMachine machine);
+
+	/**
 	 * Reads from the Products, Money and Operator files.
 	 * Adds products and coins to their arraylists as well as adding their quantities to their own arraylists.
 	 * Separates operator details for use in another method.

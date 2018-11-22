@@ -12,14 +12,15 @@ class VendingMachineCMD implements VendingMachineMenu
 {
 
 	boolean gui;
-	boolean operator;
+	boolean operator = false;
 	private Scanner in = new Scanner(System.in);
 
 	/**
 	 * The commandline interface for the vending machine.
 	 * @param machine the Vending Machine currently in use.
 	 */
-	void runCMD(VendingMachine machine)
+	@Override
+	public void run(VendingMachine machine)
 	{
 		boolean running = true;
 		while (running)
@@ -71,7 +72,7 @@ class VendingMachineCMD implements VendingMachineMenu
 	 * @return the available options
 	 */
 	@Override
-	private String showOptions()
+	public String showOptions()
 	{
 		String output = "(S)how products\n" +
 						"(I)nsert coin\n" +
@@ -89,7 +90,7 @@ class VendingMachineCMD implements VendingMachineMenu
 	}
 
 	@Override
-	void accessOperatorMode(String operatorPassword)
+	public void accessOperatorMode(String operatorPassword)
 	{
 		System.out.print("Enter operator password:\t");
 		//Scanner in = new Scanner(System.in);
@@ -99,7 +100,7 @@ class VendingMachineCMD implements VendingMachineMenu
 	}
 
 	@Override
-	private void addNewProduct(VendingMachine machine)
+	public void addNewProduct(VendingMachine machine)
 	{
 		System.out.print("Enter description: ");
 		//Scanner in = new Scanner(System.in);
@@ -131,7 +132,7 @@ class VendingMachineCMD implements VendingMachineMenu
 	}
 
 	@Override
-	private Object getChoice(Object[] choices)
+	public Object getChoice(Object[] choices)
 	{
 		for (int i = 0; i < choices.length; i++)
 			System.out.printf("%d) %s\n", i + 1, choices[i]);

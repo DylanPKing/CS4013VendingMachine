@@ -24,14 +24,16 @@ import javafx.stage.Stage;
 
 public class VendingMachineGUI extends VendingMachineSimulation implements VendingMachineMenu
 {
+	private boolean operator = false;
+
     /**
 	 * @Szymon just testing if code crashes when it gets here...
 	 */
-	void runGUI(VendingMachineMenu menu, VendingMachine machine)
+	@Override
+	public void run(VendingMachine machine)
 	{
 		boolean running = true;
 		// Set the gui boolean to true.
-		menu.gui = true;
 
 		// Set up the stage.
 		Stage mainMenu = new Stage();
@@ -80,7 +82,7 @@ public class VendingMachineGUI extends VendingMachineSimulation implements Vendi
 
 		// Fill Up The grid.
 		option.getChildren().add(InstructionHolder);
-		if(menu.operator)
+		if(operator)
 		{
 			option.getChildren().add(InstructionHolder);
 			option.getChildren().add(AddProducts);
@@ -109,10 +111,23 @@ public class VendingMachineGUI extends VendingMachineSimulation implements Vendi
 		System.out.println("Got here!");
 	}
 
-	
+	@Override
+	public String showOptions() {
+		return null;
+	}
+
+	@Override
+	public String showProducts(ArrayList<Product> products) {
+		return VendingMachineMenu.super.showProducts(products);
+	}
 
 	@Override
 	public void accessOperatorMode(String operatorPassword) {
+		
+	}
+
+	@Override
+	public void addNewProduct(VendingMachine machine) {
 		
 	}
 

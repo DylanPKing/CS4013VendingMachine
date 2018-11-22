@@ -25,13 +25,11 @@ public class VendingMachineSimulation extends Application
 {
 	// Make the initial menu for the machine.
 	public static VendingMachine machine = new VendingMachine();
-	public static VendingMachineMenu menu = new VendingMachineMenu();
-	public static VendingMachineGUI guiMenu = new VendingMachineGUI();
+	public static VendingMachineMenu menu;
 
 	public static void main(String[] args)  throws IOException
 	{
 		//Run the machine
-		menu.readFiles(machine);
 		launch(args);
 		menu.writeFiles(machine);
 		
@@ -41,7 +39,7 @@ public class VendingMachineSimulation extends Application
 	 * This is the start for the GUI interface.
 	 * @author Szymon Sztyrmer
 	 */
-	public void start(Stage primaryStage)
+	public void start(Stage primaryStage) throws IOException
 	{
 		// Set up the grid pane
 		GridPane choice = new GridPane();
@@ -77,14 +75,18 @@ public class VendingMachineSimulation extends Application
 		cmdButton.setOnAction(event ->
 		{
 			primaryStage.close();
-			menu.runCMD(machine);
+			menu = new VendingMachineCMD();
+			menu.readFiles(machine);
+			menu.run(machine);
 		});
 
 		// Set up the action listener for the gui button
 		guiButton.setOnAction(event ->
 		{
 			primaryStage.close();
-			guiMenu.runGUI(menu, machine);
+			menu = new VendingMachineGUI();
+			menu.readFiles(machine);
+			menu.run(machine);
 		});
 		
 		// Set up the Stage
