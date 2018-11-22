@@ -12,7 +12,7 @@ class VendingMachineMenu
 {
 
 	boolean gui;
-	private boolean operator;
+	boolean operator;
 	private Scanner in = new Scanner(System.in);
 
 	/**

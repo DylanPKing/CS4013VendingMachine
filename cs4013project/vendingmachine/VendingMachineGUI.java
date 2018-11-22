@@ -50,7 +50,13 @@ public class VendingMachineGUI extends VendingMachineSimulation
 		//instruction.setFont(Font.font("Comic Sans MS")); Because I was told we're not doing comic sans :-(
 
 		// Set up buttons.
-
+		Button btShowProducts = new Button("Show products");
+		Button btInsertCoin = new Button("Insert coin");
+		Button btBuyProduct = new Button("Buy product");
+		Button btAccessOperatorMode = new Button("Access operator mode");
+		Buitton btAddProducts = new Button("AddProducts");
+		Button btRemoveCoins = new Button("Remove coins");
+		Button btQuit = new Button("Quit");
 		
 		System.out.println("Got here!");
 	}
