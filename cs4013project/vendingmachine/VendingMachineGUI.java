@@ -25,14 +25,13 @@ import javafx.stage.Stage;
 public class VendingMachineGUI extends VendingMachineSimulation implements VendingMachineMenu
 {
 	private boolean operator = false;
-
     /**
 	 * @Szymon just testing if code crashes when it gets here...
 	 */
 	@Override
 	public void run(VendingMachine machine)
 	{
-		boolean running = true;
+		boolean firstRun = false;
 		// Set the gui boolean to true.
 
 		// Set up the stage.
@@ -84,7 +83,6 @@ public class VendingMachineGUI extends VendingMachineSimulation implements Vendi
 		option.getChildren().add(InstructionHolder);
 		if(operator)
 		{
-			option.getChildren().add(InstructionHolder);
 			option.getChildren().add(AddProducts);
 			option.getChildren().add(RemoveCoins);
 		}
@@ -107,8 +105,6 @@ public class VendingMachineGUI extends VendingMachineSimulation implements Vendi
 		// Populate the stage
 		mainMenu.setScene(screen);
 		mainMenu.show();
-		
-		System.out.println("Got here!");
 	}
 
 	@Override
@@ -139,6 +135,7 @@ public class VendingMachineGUI extends VendingMachineSimulation implements Vendi
 		StackPane information = new StackPane();
 		StackPane enterText = new StackPane();
 		StackPane ok = new StackPane();
+		StackPane message = new StackPane();
 
 		// Set up of HBox
 		//fullPane.setAlignment(Pos.CENTER);
@@ -146,11 +143,13 @@ public class VendingMachineGUI extends VendingMachineSimulation implements Vendi
 
 		// The actual text
 		Text txtInformation = new Text("Please enter the operator password");
-		Text empty = new Text();
 
 		// The typing field
 		TextField txtEnterText = new TextField();
 		txtEnterText.setEditable(true);
+
+		// a Label
+		Label lbMessage = new Label("Password hasn't been entered");
 
 		// The button
 		Button btOk = new Button("Ok");
@@ -162,11 +161,12 @@ public class VendingMachineGUI extends VendingMachineSimulation implements Vendi
 			if(!newValue)
 			{
 				if(!txtEnterText.getText().matches(operatorPassword))
-					System.out.println("That is not the correct password"); // change this to a label
+					lbMessage.setText("You're obviously not an operator"); // change this to a label
 				else
 					{
 						operator = true;
-						//close stage
+						enterPassword.close();
+						run(machine);
 					}
 			}
 		});
@@ -175,10 +175,11 @@ public class VendingMachineGUI extends VendingMachineSimulation implements Vendi
 		information.getChildren().add(txtInformation);
 		enterText.getChildren().add(txtEnterText);
 		ok.getChildren().add(btOk);
-		fullPane.getChildren().addAll(information, enterText, ok);
+		message.getChildren().add(lbMessage);
+		fullPane.getChildren().addAll(information, enterText, ok, message);
 
 		// Time for scene
-		Scene screen = new Scene(fullPane, 400, 100);
+		Scene screen = new Scene(fullPane, 600, 100);
 
 		// Put together
 		enterPassword.setTitle("Operator Menu");
