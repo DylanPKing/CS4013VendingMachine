@@ -401,6 +401,8 @@ public class VendingMachineGUI extends VendingMachineSimulation implements Vendi
 						try
 						{
 							machine.buyProduct((Product) choices[Integer.parseInt(txtEnterItem.getText()) - 1]);
+							choiceList.close();
+							run(machine);
 						}
 						catch(VendingException ex)
 						{
