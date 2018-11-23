@@ -94,10 +94,17 @@ public class VendingMachineGUI extends VendingMachineSimulation implements Vendi
 			option.getChildren().add(InsertCoin);
 			option.getChildren().add(Quit);
 
+		// Action listener for the operator mode button
 		btAccessOperatorMode.setOnAction(event -> 
 		{
 			mainMenu.close();
 			accessOperatorMode(machine.getOperatorPassword());
+		});
+
+		// Action listener for the quit button.
+		btQuit.setOnAction(event ->
+		{
+			mainMenu.close();
 		});
 
 		// Make the scene to put the pane into
