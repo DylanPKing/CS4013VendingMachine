@@ -175,5 +175,5 @@ interface VendingMachineMenu
 	 * @param choices Object array of the coins/products
 	 * @return the choice made by the user.
 	 */
-	abstract Object getChoice(Object[] choices);
+	//abstract Object getChoice(Object[] choices);
 }

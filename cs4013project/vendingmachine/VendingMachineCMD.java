@@ -131,7 +131,7 @@ class VendingMachineCMD implements VendingMachineMenu
 		//in.close();
 	}
 
-	@Override
+	//@Override
 	public Object getChoice(Object[] choices)
 	{
 		for (int i = 0; i < choices.length; i++)
