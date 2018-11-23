@@ -122,6 +122,13 @@ public class VendingMachineGUI extends VendingMachineSimulation implements Vendi
 			coinAdder();
 		});
 
+		// Action listener for the buy product button
+		btBuyProduct.setOnAction(event ->
+		{
+			mainMenu.close();
+			buy();
+		});
+
 		// Make the scene to put the pane into
 		Scene screen = new Scene(option, 300, 200);
 		// Populate the stage
@@ -338,12 +345,12 @@ public class VendingMachineGUI extends VendingMachineSimulation implements Vendi
 		
 	}
 
-	//@Override
-	public void getChoice(Object[] choices)
+	public void buy()
 	{
 		int number = 1;
 		String listOfItems = "";
 		String pattern = "[0-9]{1,}";
+		Object [] choices = machine.getProducts().toArray();
 		// Make a stage
 		Stage choiceList = new Stage();
 
@@ -391,7 +398,15 @@ public class VendingMachineGUI extends VendingMachineSimulation implements Vendi
 					else
 					{
 						choiceList.close();
-						getItem(choices, Integer.parseInt(txtEnterItem.getText()));
+						try
+						{
+							machine.buyProduct((Product) choices[Integer.parseInt(txtEnterItem.getText()) - 1]);
+						}
+						catch(VendingException ex)
+						{
+							choiceList.close();
+							showError(ex);
+						}
 					}
 				}
 			}
@@ -422,5 +437,42 @@ public class VendingMachineGUI extends VendingMachineSimulation implements Vendi
 			position = i;
 		}
 		return choices[position];
+	}
+
+	public void showError(VendingException ex)
+	{
+		// Set up the stage
+		Stage error = new Stage();
+		//Stage.setTitle("Error");
+
+		// Set up the panes
+		VBox errorContents = new VBox();
+		StackPane message = new StackPane();
+		StackPane ok = new StackPane();
+
+		// Set up the text
+		Text txtMessage = new Text(ex.getMessage());
+
+		// Set up the button
+		Button btOk = new Button("Ok");
+
+		// Set up the action listener
+		btOk.setOnAction(event -> 
+		{
+			error.close();
+			run(machine);
+		});
+
+		//Assemble
+		message.getChildren().add(txtMessage);
+		ok.getChildren().add(btOk);
+		errorContents.getChildren().addAll(message, ok);
+
+		// Make the scene
+		Scene screen = new Scene(errorContents, 100, 45);
+
+		// Fill stage
+		error.setScene(screen);
+		error.show();
 	}
 }
