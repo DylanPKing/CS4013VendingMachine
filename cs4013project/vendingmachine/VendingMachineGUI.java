@@ -104,6 +104,7 @@ public class VendingMachineGUI extends VendingMachineSimulation implements Vendi
 		// Action listener for the quit button.
 		btQuit.setOnAction(event ->
 		{
+			//menu.writeFiles(machine);
 			mainMenu.close();
 		});
 
@@ -257,24 +258,78 @@ public class VendingMachineGUI extends VendingMachineSimulation implements Vendi
 	 */
 	public void coinAdder()
 	{
-		// Make the stage
-		Stage coinMenu = new Stage();
+		int number = 1;
+		String listOfItems = "";
+		String pattern = "[0-9]{1,}";
+		Object [] choices = machine.getCoins().toArray();
+		// Make a stage
+		Stage choiceList = new Stage();
 
-		// Make some panes.
-		VBox coinsList = new VBox();
-		
-		// Buttons
-		Button btCoin;
+		// Make some panes
+		VBox list = new VBox();
+		list.setSpacing(5);
+		list.setAlignment(Pos.CENTER);
+		StackPane choice = new StackPane();
+		StackPane ok = new StackPane();
+		StackPane enterItem = new StackPane();
+		StackPane error = new StackPane();
 
-		try
+		// Make a normal label
+		Label lbError = new Label();
+
+		// Make my big label
+		Label bigLabel = new Label("");
+
+		for (int i = 0; i < choices.length; i++)
 		{
-			getChoice(machine.getCoins().toArray());
-			//machine.addCoin((Coin)getChoice(machine.getCoins().toArray()));
+			listOfItems += (number) + ") " + choices[i].toString() + "\n";
+			number++;
 		}
-		catch (VendingException ex)
+
+		// Fill the label
+		bigLabel.setText(listOfItems);
+
+		// Make a universal button
+		Button btOk = new Button("Ok");
+
+		// Make a text field
+		TextField txtEnterItem = new TextField("Enter the number here");
+
+		// Action listener for the text field button combo
+		txtEnterItem.focusedProperty().addListener((arg0, oldValue, newValue) ->
 		{
-			System.out.println(ex.getMessage());
-		}
+			if(!newValue)
+			{
+				if(!txtEnterItem.getText().matches(pattern))
+					lbError.setText("Stop that, Dingus");
+				else
+				{
+					if(1 > Integer.parseInt(txtEnterItem.getText()) || Integer.parseInt(txtEnterItem.getText()) > choices.length)
+						lbError.setText("Nice try, Dingus");
+					else
+					{
+						choiceList.close();
+						machine.addCoin((Coin) choices[Integer.parseInt(txtEnterItem.getText()) - 1]);
+						run(machine);
+					}
+				}
+			}
+		});
+
+		// Fill panes
+		choice.getChildren().add(bigLabel);
+		enterItem.getChildren().add(txtEnterItem);
+		ok.getChildren().add(btOk);
+		error.getChildren().add(lbError);
+		list.getChildren().addAll(choice, enterItem, error, ok);
+
+		// Make a scene
+		Scene screen = new Scene(list, 200, 300);
+
+		// Set up the stage
+		choiceList.setTitle("Choose Item");
+		choiceList.setScene(screen);
+		choiceList.show();
 	}
 
 	@Override
