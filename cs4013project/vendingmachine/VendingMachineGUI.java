@@ -2,7 +2,6 @@ package cs4013project.vendingmachine;
 
 import java.util.*;
 
-
 import java.io.*;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -107,6 +106,13 @@ public class VendingMachineGUI extends VendingMachineSimulation implements Vendi
 			mainMenu.close();
 		});
 
+		// Action listener for the show products button
+		btShowProducts.setOnAction(event ->
+		{
+			mainMenu.close();
+			showStock();
+		});
+
 		// Make the scene to put the pane into
 		Scene screen = new Scene(option, 300, 200);
 		// Populate the stage
@@ -193,6 +199,45 @@ public class VendingMachineGUI extends VendingMachineSimulation implements Vendi
 		enterPassword.setScene(screen);
 		enterPassword.show();
 
+	}
+
+	public void showStock()
+	{
+		// Make a new stage
+		Stage stock = new Stage();
+
+		// Make some panes
+		VBox list = new VBox();
+		list.setSpacing(5);
+		list.setAlignment(Pos.CENTER);
+		StackPane products = new StackPane();
+		StackPane ok = new StackPane();
+
+		// Make some buttons.
+		Button btOk = new Button("Ok");
+
+		// Action listener for the ok button
+		btOk.setOnAction(event ->
+		{
+			stock.close();
+			run(machine);
+		});
+
+		// Labels maybe?
+		Label lbProducts = new Label(showProducts(machine.getProducts()));
+
+		//Asseble panes
+		products.getChildren().add(lbProducts);
+		ok.getChildren().add(btOk);
+		list.getChildren().addAll(products, ok);
+
+		// Scene making 101
+		Scene screen = new Scene(list, 300, 300);
+
+		// Add to stage and display
+		stock.setTitle("Products");
+		stock.setScene(screen);
+		stock.show();
 	}
 
 	@Override

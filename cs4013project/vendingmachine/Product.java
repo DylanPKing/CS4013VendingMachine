@@ -41,7 +41,7 @@ class Product
 	@Override
 	public String toString()
 	{
-		return String.format("Description:\t%s\nPrice:\t%.2f",
+		return String.format("Description:\t%s\nPrice:\t\t%.2f\n",
 							 description, price);
 	}
 }
