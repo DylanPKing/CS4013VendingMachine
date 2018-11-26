@@ -443,7 +443,9 @@ public class VendingMachineGUI extends VendingMachineSimulation implements Vendi
 	{
 		Stage remove = new Stage();
 
-		HBox fullPane = new HBox();
+		VBox fullPane = new VBox();
+		fullPane.setAlignment(Pos.CENTER);
+		fullPane.setSpacing(10);
 		StackPane removed = new StackPane();
 		StackPane ok = new StackPane();
 		Label lbremove = new Label(removeCurrentCoins(machine));
