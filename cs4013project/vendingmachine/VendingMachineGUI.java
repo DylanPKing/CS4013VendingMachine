@@ -445,10 +445,19 @@ public class VendingMachineGUI extends VendingMachineSimulation implements Vendi
 
 		HBox fullPane = new HBox();
 		StackPane removed = new StackPane();
+		StackPane ok = new StackPane();
 		Label lbremove = new Label(removeCurrentCoins(machine));
+		Button btOk = new Button("OK");
+
+		btOk.setOnAction(event ->
+		{
+			remove.close();
+			run(machine);
+		});
 
 		removed.getChildren().add(lbremove);
-		fullPane.getChildren().addAll(removed);
+		ok.getChildren().add(btOk);
+		fullPane.getChildren().addAll(removed, ok);
 
 		Scene screen = new Scene(fullPane, 200, 200);
 

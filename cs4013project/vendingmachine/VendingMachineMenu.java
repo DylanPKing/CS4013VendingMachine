@@ -95,13 +95,13 @@ interface VendingMachineMenu
 	 */
 	default void writeFiles(VendingMachine machine) throws IOException
 	{
-		File coin = new File("./Coins.csv");
+		File coin = new File("./Money.csv");
 		File product = new File("./Products.csv");
 		
-		FileWriter fr = new FileWriter(product);
+		FileWriter fr = new FileWriter(product, false);
 		PrintWriter pr = new PrintWriter(fr);
 		
-		FileWriter fr1 = new FileWriter(coin);
+		FileWriter fr1 = new FileWriter(coin, false);
 		PrintWriter pr1 = new PrintWriter(fr1);
 		
 		ArrayList<Product> products = machine.getProducts();
@@ -121,9 +121,9 @@ interface VendingMachineMenu
 
 		for(int i = 0; i < coins.size();i++)
 		{
-			pr1.print(coins.get(i).getName() + "," +
+			pr1.println(coins.get(i).getName() + "," +
 					  coins.get(i).getValue() + "," +
-					  coinQuantity.get(i).toString());
+					  coinQuantity.get(i));
 		}
 		fr1.close();
 		pr1.close();

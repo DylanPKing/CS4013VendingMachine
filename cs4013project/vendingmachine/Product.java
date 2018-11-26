@@ -44,4 +44,16 @@ class Product
 		return String.format("Description:\t%s\nPrice:\t\t%.2f\n",
 							 description, price);
 	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if(obj instanceof Product)
+		{
+			return (description.equals(((Product)obj).getDescription()) && (price == ((Product)obj).getPrice()));
+		}
+		else
+		{
+			return false;
+		}
+	}
 }
