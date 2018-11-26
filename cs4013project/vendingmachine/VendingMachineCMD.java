@@ -25,10 +25,8 @@ class VendingMachineCMD implements VendingMachineMenu
 		boolean running = true;
 		while (running)
 		{
-			//Scanner in = new Scanner(System.in);
 			System.out.println(showOptions());
 			String command = in.nextLine();
-			//in.close();
 
 			if (command.equalsIgnoreCase("S"))
 				System.out.print(showProducts(machine.getProducts()));
@@ -93,17 +91,14 @@ class VendingMachineCMD implements VendingMachineMenu
 	public void accessOperatorMode(String operatorPassword)
 	{
 		System.out.print("Enter operator password:\t");
-		//Scanner in = new Scanner(System.in);
 		if (in.nextLine().equals(operatorPassword))
 			operator = true; 
-		//in.close();
 	}
 
 	@Override
 	public void addNewProduct(VendingMachine machine)
 	{
 		System.out.print("Enter description: ");
-		//Scanner in = new Scanner(System.in);
 		String description = in.nextLine();
 		boolean valid = false;
 		while (!valid)
@@ -128,18 +123,20 @@ class VendingMachineCMD implements VendingMachineMenu
 			else
 				System.out.println("Invalid price.");
 		}
-		//in.close();
 	}
 
-	//@Override
+	/**
+	 * Takes in the array of either products or coins, as specified,
+	 * an prompts the user for their choice.
+	 * @param choices Array of products/coins
+	 * @return product or coin chosen.
+	 */
 	public Object getChoice(Object[] choices)
 	{
 		for (int i = 0; i < choices.length; i++)
 			System.out.printf("%d) %s\n", i + 1, choices[i]);
-		//Scanner in = new Scanner(System.in);
 		String inputStr = in.nextLine();
 		int input = (inputStr.matches("\\d+") ? Integer.parseInt(inputStr) : -1);
-		//in.close();
 		if (input < 0 || input > choices.length)
 			throw new VendingException("Invalid choice.");
 		return choices[input - 1];

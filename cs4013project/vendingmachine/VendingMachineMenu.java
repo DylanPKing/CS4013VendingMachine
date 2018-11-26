@@ -5,6 +5,9 @@ import java.io.*;
 
 /**
  * VendingMachineMenu
+ * This interface is the base for both the VendingMachineCMD and VendimgMachineGUI
+ * classes, and contains all common methods between the two classes, as well as
+ * method headers that both will use.
  * @author Dylan King 17197813
  * @author Brian Malone 17198178
  */
@@ -169,11 +172,4 @@ interface VendingMachineMenu
 	{
 		return "Removed: " + machine.removeMoney();
 	}
-
-	/**
-	 * Prints the available choices of the passed in Array
-	 * @param choices Object array of the coins/products
-	 * @return the choice made by the user.
-	 */
-	//abstract Object getChoice(Object[] choices);
 }
