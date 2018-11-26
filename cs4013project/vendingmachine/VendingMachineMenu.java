@@ -123,7 +123,7 @@ interface VendingMachineMenu
 		{
 			pr1.print(coins.get(i).getName() + "," +
 					  coins.get(i).getValue() + "," +
-					  coinQuantity.get(i));
+					  coinQuantity.get(i).toString());
 		}
 		fr1.close();
 		pr1.close();

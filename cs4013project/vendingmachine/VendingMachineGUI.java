@@ -101,6 +101,13 @@ public class VendingMachineGUI extends VendingMachineSimulation implements Vendi
 			accessOperatorMode(machine.getOperatorPassword());
 		});
 
+		// Action listener for the Add Products button
+		btAddProducts.setOnAction(event -> 
+		{
+			mainMenu.close();
+			addNewProduct(machine);
+		});
+
 		// Action listener for the quit button.
 		btQuit.setOnAction(event ->
 		{
@@ -129,8 +136,14 @@ public class VendingMachineGUI extends VendingMachineSimulation implements Vendi
 			buy();
 		});
 
+		btRemoveCoins.setOnAction(event ->
+		{
+			mainMenu.close();
+			remove(machine);
+		});
+
 		// Make the scene to put the pane into
-		Scene screen = new Scene(option, 300, 200);
+		Scene screen = new Scene(option, 300, 400);
 		// Populate the stage
 		mainMenu.setScene(screen);
 		mainMenu.show();
@@ -208,7 +221,7 @@ public class VendingMachineGUI extends VendingMachineSimulation implements Vendi
 		fullPane.getChildren().addAll(information, enterText, ok, message);
 
 		// Time for scene
-		Scene screen = new Scene(fullPane, 600, 100);
+		Scene screen = new Scene(fullPane, 700, 100);
 
 		// Put together
 		enterPassword.setTitle("Operator Menu");
@@ -342,7 +355,106 @@ public class VendingMachineGUI extends VendingMachineSimulation implements Vendi
 	@Override
 	public void addNewProduct(VendingMachine machine) 
 	{
-		
+		// Make a stage
+		Stage addProduct = new Stage();
+
+		//Add panes
+		VBox fullPane = new VBox();
+		StackPane information = new StackPane();
+		StackPane enterDescription = new StackPane();
+		StackPane enterPrice = new StackPane();
+		StackPane enterQuantity = new StackPane();
+		StackPane add = new StackPane();
+		StackPane description = new StackPane();
+		StackPane price = new StackPane();
+		StackPane quantity = new StackPane();
+
+		fullPane.setSpacing(5);
+
+		Text txtInfo = new Text("Enter the product you wish to add");
+
+		Label lbDescription = new Label("\nDescription:");
+		Label lbPrice = new Label("\nPrice:");
+		Label lbQuantity = new Label("\nQuantity:");
+
+		TextField txtEnterDesc = new TextField();
+		txtEnterDesc.setEditable(true);
+
+		TextField txtEnterPrice = new TextField();
+		txtEnterPrice.setEditable(true);
+
+		TextField txtEnterQuant = new TextField();
+		txtEnterQuant.setEditable(true);
+
+		Button btAdd = new Button("Add");
+
+		btAdd.setOnAction(event ->
+		{
+			if(txtEnterPrice.getText().matches("\\d*.?\\d+") && txtEnterQuant.getText().matches("\\d+"))
+			{
+				ArrayList<Product> existingProducts = machine.getProducts();
+				ArrayList<Integer> existingProdQuant = machine.getProdQuantity();
+				String prodDesc = txtEnterDesc.getText();
+				String prodPrice = txtEnterPrice.getText();
+				Double priceVal = Double.parseDouble(prodPrice);
+				Product added = new Product(prodDesc, priceVal);
+				int addQuantity = Integer.parseInt(txtEnterQuant.getText());		
+
+				if(existingProducts.contains(added))
+				{
+					for(int i = 0; i < existingProducts.size(); i++)
+					{
+						if(existingProducts.get(i).equals(added))
+						{
+							existingProdQuant.set(i, (existingProdQuant.get(i) + addQuantity));
+							addProduct.close();
+							run(machine);
+						}
+					}
+				}
+				else
+				{			
+					existingProducts.add(added);				
+					existingProdQuant.add(addQuantity);
+					addProduct.close();
+					run(machine);
+				}
+			}
+		});
+
+		information.getChildren().add(txtInfo);
+		description.getChildren().add(lbDescription);
+		enterDescription.getChildren().add(txtEnterDesc);
+		price.getChildren().add(lbPrice);
+		enterPrice.getChildren().add(txtEnterPrice);
+		quantity.getChildren().add(lbQuantity);
+		enterQuantity.getChildren().add(txtEnterQuant);
+		add.getChildren().add(btAdd);
+		fullPane.getChildren().addAll(information, description, enterDescription, price, enterPrice, quantity, enterQuantity, add);
+
+		Scene screen = new Scene(fullPane, 300, 350);
+
+		addProduct.setTitle("Add Product");
+		addProduct.setScene(screen);
+		addProduct.show();
+	}
+
+	public void remove(VendingMachine machine)
+	{
+		Stage remove = new Stage();
+
+		HBox fullPane = new HBox();
+		StackPane removed = new StackPane();
+		Label lbremove = new Label(removeCurrentCoins(machine));
+
+		removed.getChildren().add(lbremove);
+		fullPane.getChildren().addAll(removed);
+
+		Scene screen = new Scene(fullPane, 200, 200);
+
+		remove.setTitle("Remove coins");
+		remove.setScene(screen);
+		remove.show();
 	}
 
 	public void buy()
