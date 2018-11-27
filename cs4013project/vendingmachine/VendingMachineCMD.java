@@ -4,11 +4,11 @@ import java.util.*;
 import java.io.*;
 
 /**
- * VendingMachineMenu
- * @author Dylan King 17197813
+ * This is the command line interface for the vending machine.
+ * @author Dylan King 	17197813
  * @author Brian Malone 17198178
  */
-class VendingMachineCMD implements VendingMachineMenu
+public class VendingMachineCMD implements VendingMachineMenu
 {
 
 	boolean gui;
@@ -61,7 +61,9 @@ class VendingMachineCMD implements VendingMachineMenu
 			else if (command.equalsIgnoreCase("R") && operator)
 				System.out.println(removeCurrentCoins(machine));
 			else if (command.equalsIgnoreCase("Q"))
+			{
 				running = false;
+			}
 		}
 	}
 

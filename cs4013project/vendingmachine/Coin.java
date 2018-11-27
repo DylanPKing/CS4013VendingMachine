@@ -1,11 +1,11 @@
 package cs4013project.vendingmachine;
 
 /**
- * Coin
+ * The Coin class contains the coins name and monetary value.
  * @author Michael English
- * @author Dylan King
+ * @author Dylan King 		17197813
  */
-class Coin 
+public class Coin 
 {
 
 	private double value;
@@ -16,7 +16,7 @@ class Coin
      * @param value the monetary value of the coin.
      * @param name the name of the coin
 	 */
-	Coin(double value, String name)
+	public Coin(double value, String name)
 	{ 
 		this.value = value; 
 		this.name = name;
@@ -25,7 +25,7 @@ class Coin
 	/**
 	 * @return the value
 	 */
-	double getValue()
+	public double getValue()
 	{
 		return value;
 	}
@@ -33,7 +33,7 @@ class Coin
 	/**
 	 * @return the name
 	 */
-	String getName()
+	public String getName()
 	{
 		return name;
 	}

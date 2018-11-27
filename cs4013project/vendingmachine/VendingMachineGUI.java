@@ -25,6 +25,8 @@ import javafx.stage.Stage;
  * This is the class responsible for the gui interface of the vending machine
  * @extends VendingMachineSimulation
  * @implements VendingMachineMenu
+ * @author Szymon Sztyrmer	17200296
+ * @author Louise Madden	17198232
  */
 public class VendingMachineGUI extends VendingMachineSimulation implements VendingMachineMenu
 {

@@ -3,9 +3,11 @@ package cs4013project.vendingmachine;
 import java.util.*;
 
 /**
+ * The back-end for the vending machine.
+ * In here all of the transaction and management methods.
  * @author Louise Madden 17198232
  */
-class VendingMachine
+public class VendingMachine
 {
     private ArrayList<Product> products;
     private ArrayList<Integer> prodQuantity;
@@ -17,7 +19,7 @@ class VendingMachine
     /**
      * Constructor
      */
-    VendingMachine() 
+    public VendingMachine() 
     {
         products = new ArrayList<Product>();
         prodQuantity = new ArrayList<Integer>();
@@ -29,42 +31,42 @@ class VendingMachine
     /**
      * @return the products
      */
-    ArrayList<Product> getProducts() {
+    public ArrayList<Product> getProducts() {
         return products;
     }
 
     /**
      * @return the coins
      */
-    ArrayList<Coin> getCoins() {
+    public ArrayList<Coin> getCoins() {
         return coins;
     }
 
     /**
      * @return the prodQuantity
      */
-    ArrayList<Integer> getProdQuantity() {
+    public ArrayList<Integer> getProdQuantity() {
         return prodQuantity;
     }
 
     /**
      * @return the coinQuantity
      */
-    ArrayList<Integer> getCoinQuantity() {
+    public ArrayList<Integer> getCoinQuantity() {
         return coinQuantity;
     }
 
     /**
      * @return the operatorPassword
      */
-    String getOperatorPassword() {
+    public String getOperatorPassword() {
         return operatorPassword;
     }
 
     /**
      * @param operatorPassword the operatorPassword to set
      */
-    void setOperatorPassword(String operatorPassword) {
+    public void setOperatorPassword(String operatorPassword) {
         this.operatorPassword = operatorPassword;
     }
 
@@ -73,7 +75,7 @@ class VendingMachine
      * The coin that is added is added to currentCoins to be used later
      * Adds the value of the coin to currentBalance
      */
-    void addCoin(Coin inserted)
+    public void addCoin(Coin inserted)
     {
         currentCoins.add(inserted);
         currentBalance += inserted.getValue();
@@ -86,7 +88,7 @@ class VendingMachine
      * the coins are moved from currentCoins to coins and their qantity to coinQuantity 
      * If they dont have enough it returns the users coins and throws a VendingException
      */
-    void buyProduct(Product toBuy)
+    public void buyProduct(Product toBuy)
     {
         //You can buy it
         if (currentBalance >= toBuy.getPrice())
@@ -132,7 +134,7 @@ class VendingMachine
      * Resets the quantity of each coin to 0
      * @return double total (total money in the machine)
      */
-    double removeMoney()
+    public double removeMoney()
     {
         double total = 0;
         for (int i = 0; i < coins.size(); i++)
@@ -157,7 +159,7 @@ class VendingMachine
      * If there is already some of this product in the machine then the added quantity is added to the quantity that is already in the machine
      * If there are none of the product in the machine it adds a new product in the ArrayList and adds the products in the parallel prodQuantity ArrayList
      */
-    void addProduct(Product toAdd, int quantity)
+    public void addProduct(Product toAdd, int quantity)
     {
         if(!products.contains(toAdd))
         {

@@ -1,28 +1,14 @@
 package cs4013project.vendingmachine;
 
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.geometry.HPos;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
-import javafx.geometry.VPos;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.layout.*;
-import javafx.scene.Scene;
-import javafx.scene.text.Text;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
-import javafx.scene.text.FontPosture;
 import javafx.stage.Stage;
 import java.io.*;
 import java.util.Scanner;
 
 /**
- * VendingMachineSimulation
- * @author Dylan King
- * @author Szymon Sztyrmer
+ * This is the executable class for the vending machine.
+ * @author Dylan King		17197813
+ * @author Szymon Sztyrmer	17200296
  */
 public class VendingMachineSimulation extends Application
 {
@@ -44,8 +30,8 @@ public class VendingMachineSimulation extends Application
 			{
 				menu = new VendingMachineCMD();
 				menu.readFiles(machine);
-				menu.run(machine);
 				running = false;
+				menu.run(machine);
 			}
 			else if(input.equals("G"))
 			{
@@ -59,8 +45,11 @@ public class VendingMachineSimulation extends Application
 		}
 		//launch(args);
 		if(menu instanceof VendingMachineMenu)
+		{
 			menu.writeFiles(machine);
+		}
 		in.close();
+		System.exit(0);
 	}
 
 	/**

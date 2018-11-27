@@ -1,11 +1,11 @@
 package cs4013project.vendingmachine;
 
 /**
- * Product
+ * This is the class for products, which contains the products name and price.
  * @author Michael English
- * @author Dylan King
+ * @author Louise Madden		17198232
  */
-class Product
+public class Product
 {
 
 	private String description;
@@ -16,7 +16,7 @@ class Product
      * @param description the description of the product
      * @param price the price of the product
 	 */
-	Product(String description, double price)
+	public Product(String description, double price)
 	{  
 		this.description = description;
 		this.price = price;
@@ -25,7 +25,7 @@ class Product
 	/**
 	 * @return the description
 	 */
-	String getDescription()
+	public String getDescription()
 	{
 		return description;
 	}
@@ -33,7 +33,7 @@ class Product
 	/**
 	 * @return the price
 	 */
-	double getPrice()
+	public double getPrice()
 	{
 		return price;
 	}

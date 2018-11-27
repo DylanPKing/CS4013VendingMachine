@@ -1,11 +1,14 @@
 package cs4013project.vendingmachine;
 
 /**
- * VendingException
+ * VendingException is our exception class, which is used in error handling.
+ * @author Michael English
  */
-class VendingException extends RuntimeException {
+public class VendingException extends RuntimeException
+{
 
-	VendingException(String message) {
+	public VendingException(String message)
+	{
 		super(message);
 	}
 }
