@@ -133,12 +133,6 @@ interface VendingMachineMenu
 	}
 
 	/**
-	 * Shows the options avaialable for the current user.
-	 * @return the available options
-	 */
-	abstract String showOptions();
-
-	/**
 	 * Shows the currently available products for sale
 	 * @param products the ArrayList of currently avaialable products
 	 * @return the currently avialable products as a String.

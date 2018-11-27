@@ -69,7 +69,6 @@ class VendingMachineCMD implements VendingMachineMenu
 	 * Shows the options avaialable for the current user.
 	 * @return the available options
 	 */
-	@Override
 	public String showOptions()
 	{
 		String output = "(S)how products\n" +

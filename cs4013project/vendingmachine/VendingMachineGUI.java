@@ -21,12 +21,19 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.FontPosture;
 import javafx.stage.Stage;
 
+/**
+ * This is the class responsible for the gui interface of the vending machine
+ * @extends VendingMachineSimulation
+ * @implements VendingMachineMenu
+ */
 public class VendingMachineGUI extends VendingMachineSimulation implements VendingMachineMenu
 {
+	// 2 glovals we need
 	private boolean operator = false;
 	private Object item;
     /**
-	 * @Szymon just testing if code crashes when it gets here...
+	 * @author Szymon Sztyrmer
+	 * @author Louise Madden
 	 */
 	@Override
 	public void run(VendingMachine machine)
@@ -149,12 +156,12 @@ public class VendingMachineGUI extends VendingMachineSimulation implements Vendi
 		mainMenu.show();
 	}
 
-	@Override
-	public String showOptions() 
-	{
-		return null;
-	}
-
+	/**
+	 * This method gets the arraylist of products for use in ither merthods
+	 * @author Szymon Sztyrmer
+	 * @param products
+	 * @return ArrayList<Product>
+	 */
 	@Override
 	public String showProducts(ArrayList<Product> products) 
 	{
@@ -275,6 +282,7 @@ public class VendingMachineGUI extends VendingMachineSimulation implements Vendi
 
 	/**
 	 * This method allows the user to add a coin to the machine... Hopefully
+	 * @author Szymon Sztyrmer
 	 */
 	public void coinAdder()
 	{
@@ -477,6 +485,10 @@ public class VendingMachineGUI extends VendingMachineSimulation implements Vendi
 		remove.show();
 	}
 
+	/**
+	 * This method allows the user to but a product
+	 * @author Szymon Sztyrmer
+	 */
 	public void buy()
 	{
 		int number = 1;
@@ -562,6 +574,13 @@ public class VendingMachineGUI extends VendingMachineSimulation implements Vendi
 		choiceList.show();
 	}
 
+	/**
+	 * This method is used in some button action listeners to return the clicked item
+	 * @author Szymon Sztyrmer
+	 * @param choices
+	 * @param enteredNumber
+	 * @return Object
+	 */
 	public Object getItem(Object[] choices, int enteredNumber)
 	{
 		int position = 0;
@@ -573,6 +592,11 @@ public class VendingMachineGUI extends VendingMachineSimulation implements Vendi
 		return choices[position];
 	}
 
+	/**
+	 * This method is used for throwing exceptions around the program
+	 * @author Szymon Sztyrmer
+	 * @param ex
+	 */
 	public void showError(VendingException ex)
 	{
 		// Set up the stage
