@@ -352,6 +352,10 @@ public class VendingMachineGUI extends VendingMachineSimulation implements Vendi
 		choiceList.show();
 	}
 
+	/**
+	 * This method allows the operator to add new products to the vending machine
+	 * @author Louise Madden
+	 */
 	@Override
 	public void addNewProduct(VendingMachine machine) 
 	{
@@ -439,6 +443,11 @@ public class VendingMachineGUI extends VendingMachineSimulation implements Vendi
 		addProduct.show();
 	}
 
+	/**
+	 * This method allows the operator to remove all of the coins in the vending machine
+	 * @param machine
+	 * @author Louise Madden
+	 */
 	public void remove(VendingMachine machine)
 	{
 		Stage remove = new Stage();
