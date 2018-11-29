@@ -488,7 +488,7 @@ public class VendingMachineGUI extends VendingMachineSimulation implements Vendi
 	}
 
 	/**
-	 * This method allows the user to but a product
+	 * This method allows the user to buy a product
 	 * @author Szymon Sztyrmer
 	 */
 	public void buy()
